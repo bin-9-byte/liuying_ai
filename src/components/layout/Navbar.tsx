@@ -5,8 +5,8 @@ import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
-  { to: '/', label: 'Home', icon: null },
-  { to: '/studio', label: 'Studio', icon: <Sparkles size={15} /> },
+  { to: '/home', label: 'Home', icon: null },
+  { to: '/home/studio', label: 'Studio', icon: <Sparkles size={15} /> },
 ]
 
 export default function Navbar() {
@@ -23,7 +23,7 @@ export default function Navbar() {
 
       <nav className="relative flex items-center justify-between h-full px-6 max-w-screen-xl mx-auto">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
+        <Link to="/home" className="flex items-center gap-2 group">
           <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-violet-600 to-blue-500 flex items-center justify-center shadow-lg group-hover:shadow-violet-500/40 transition-shadow duration-300">
             <Sparkles size={14} className="text-white" />
           </div>

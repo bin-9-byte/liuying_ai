@@ -6,8 +6,8 @@ const WebGLBackground = lazy(() => import('@/components/webgl/WebGLBackground'))
 
 export default function AppLayout() {
   const { pathname } = useLocation()
-  const isStudio = pathname.startsWith('/studio')
-  const isHome = pathname === '/'
+  const isStudio = pathname.startsWith('/home/studio')
+  const isHome = pathname === '/home'
 
   // 首页有自己的浅色布局，不使用全局深色背景和顶部 Navbar
   if (isHome) {

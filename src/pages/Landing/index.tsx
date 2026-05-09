@@ -565,6 +565,9 @@ export default function LandingPage() {
   const [showUploadMenu, setShowUploadMenu] = useState(false)
   const [showMoreTemplateMenu, setShowMoreTemplateMenu] = useState(false)
   const moreTemplateBtnRef = useRef<HTMLDivElement>(null)
+  // 拖拽上传状态
+  const [isDragging, setIsDragging] = useState(false)
+  const dragCounterRef = useRef(0)  // 防止子元素触发 dragLeave
   // 文件上传 input ref
   const imageInputRef = useRef<HTMLInputElement>(null)
   const videoInputRef = useRef<HTMLInputElement>(null)
@@ -665,7 +668,41 @@ export default function LandingPage() {
 
             {/* 文本框：880×140，padding:16，gap:32，justify:space-between */}
             <div
+              onDragEnter={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                dragCounterRef.current++
+                setIsDragging(true)
+              }}
+              onDragOver={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+              }}
+              onDragLeave={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                dragCounterRef.current--
+                if (dragCounterRef.current === 0) setIsDragging(false)
+              }}
+              onDrop={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                dragCounterRef.current = 0
+                setIsDragging(false)
+                const files = e.dataTransfer.files
+                if (!files || files.length === 0) return
+                Array.from(files).forEach(file => {
+                  const url = URL.createObjectURL(file)
+                  const isImage = file.type.startsWith('image/')
+                  const isVideo = file.type.startsWith('video/')
+                  if (!isImage && !isVideo) return
+                  const att = { id: `${isImage ? 'img' : 'vid'}-${file.name}-${Date.now()}`, type: isImage ? 'image' : 'video', thumbnail: url, name: file.name }
+                  setAttachments(prev => [...prev, att])
+                  insertCapsuleAtCursor(att)
+                })
+              }}
               style={{
+                position: 'relative',
                 boxSizing: 'border-box',
                 width: '100%',
                 maxWidth: 880,
@@ -1279,6 +1316,46 @@ export default function LandingPage() {
                   <IconSend active={!!prompt.trim()} />
                 </motion.button>
               </div>
+
+              {/* ── 拖拽上传毛玻璃遮罩 ── */}
+              {isDragging && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.2 }}
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    padding: '45px 126px 43px 127px',
+                    background: 'rgba(255, 255, 255, 0.3)',
+                    border: '1px dashed #878787',
+                    backdropFilter: 'blur(6px)',
+                    WebkitBackdropFilter: 'blur(6px)',
+                    borderRadius: 24,
+                    zIndex: 2,
+                    pointerEvents: 'none',
+                  }}
+                >
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                    {/* Upload icon */}
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 16V8M12 8L8 12M12 8L16 12" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M4 16V18C4 19.1 4.9 20 6 20H18C19.1 20 20 19.1 20 18V16" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <span style={{
+                      fontFamily: "'PingFang SC', sans-serif",
+                      fontWeight: 400, fontSize: 14, lineHeight: '22px',
+                      textAlign: 'center', color: '#000000',
+                    }}>
+                      在此处拖放文件以添加到聊天中
+                    </span>
+                  </div>
+                </motion.div>
+              )}
             </div>
           </div>
 
