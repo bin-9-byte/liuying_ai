@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import TextType from '@/components/TextType'
+// import TextType from '@/components/TextType' // 暂时注释掉打字机动效
 
 // ─── 占位模版图片 ───
 const TEMPLATE_IMAGES = [
@@ -644,8 +644,8 @@ export default function LandingPage() {
                 gap: 12,
               }}
             >
-              {/* 流影AI，灵感即画面：打字机动效 */}
-              <TextType
+              {/* 流影AI，灵感即画面：打字机动效（已注释，改为静态文字）*/}
+              {/* <TextType
                 as="h1"
                 text={["流影AI，灵感即画面"]}
                 typingSpeed={120}
@@ -663,7 +663,20 @@ export default function LandingPage() {
                   textAlign: 'center',
                   color: '#0E0E0E',
                 }}
-              />
+              /> */}
+              <h1 style={{
+                margin: 0,
+                width: '100%',
+                fontFamily: "'PingFang SC', sans-serif",
+                fontStyle: 'normal',
+                fontWeight: 500,
+                fontSize: 'clamp(24px, 3vw, 36px)',
+                lineHeight: '50px',
+                textAlign: 'center',
+                color: '#0E0E0E',
+              }}>
+                流影AI，灵感即画面
+              </h1>
             </div>
 
             {/* 文本框：880×140，padding:16，gap:32，justify:space-between */}
