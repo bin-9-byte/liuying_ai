@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { Check, Users, UserCheck, ArrowUpRight } from 'lucide-react'
 // import TextType from '@/components/TextType' // 暂时注释掉打字机动效
 
 // ─── 占位模版图片 ───
@@ -23,46 +24,49 @@ const TEXTAREA_MAX_HEIGHT = INPUT_BOX_MAX_HEIGHT - 16 - 16 - 32 - 36 // 减去 p
 
 // ─── 模型列表 ───
 const MODEL_LIST = [
-  { name: 'Gmini 3.1',  time: '20s',  icon: 'gemini' },
+  { name: 'Gemini 3.1',  time: '20s',  icon: 'gemini' },
   { name: 'Nano Banana 2', time: '15s', icon: 'nano' },
   { name: 'GPT 1.5',   time: '120s', icon: 'gpt' },
 ]
 
 // ─── 比例列表 ───
-const FORMAT_LIST = ['16:9', '9:16', '3:4', '4:3']
+const FORMAT_LIST = ['自适应比例','16:9', '9:16', '3:4', '4:3']
 
 // ─── 二级模版数据（横向卡片：标题 + 缩略图） ───
 interface SubCard {
   title: string
   thumbnail: string   // 左侧主图
+  overlayImage?: string  // 叠图样式第二张图
+  cardStyle?: 'tilt3d' | 'stacked'  // 卡片样式
   prompt: string      // 模版提示词（选中后回填到输入框）
 }
 const TAG_SUB_TEMPLATES: Record<string, SubCard[]> = {
   '短视频模版': [
-    { title: '产品展示',   thumbnail: 'https://picsum.photos/seed/sv1/130/83', prompt: '生成一个产品展示短视频，突出产品外观和核心功能' },
-    { title: '品牌宣传',   thumbnail: 'https://picsum.photos/seed/sv2/130/83', prompt: '制作品牌宣传视频，展现品牌理念和视觉风格' },
-    { title: '教程模版',   thumbnail: 'https://picsum.photos/seed/sv3/130/83', prompt: '创建操作教程视频，步骤清晰、画面简洁' },
-    { title: '节日主题',   thumbnail: 'https://picsum.photos/seed/sv4/130/83', prompt: '设计节日主题短视频，充满节日氛围与创意' },
-    { title: '美食探店',   thumbnail: 'https://picsum.photos/seed/sv5/130/83', prompt: '制作美食探店短视频，展现餐厅环境与菜品' },
-    { title: '旅行Vlog',  thumbnail: 'https://picsum.photos/seed/sv6/130/83', prompt: '生成旅行Vlog，记录旅途风景与人文体验' },
+    { title: '产品展示',   thumbnail: 'https://picsum.photos/seed/sv1/130/83', overlayImage: 'https://picsum.photos/seed/sv1b/130/83', cardStyle: 'stacked', prompt: '生成一个产品展示短视频，突出产品外观和核心功能' },
+    { title: '品牌宣传',   thumbnail: 'https://picsum.photos/seed/sv2/130/83', overlayImage: 'https://picsum.photos/seed/sv2b/130/83', cardStyle: 'stacked', prompt: '制作品牌宣传视频，展现品牌理念和视觉风格' },
+    { title: '教程模版',   thumbnail: 'https://picsum.photos/seed/sv3/130/83', overlayImage: 'https://picsum.photos/seed/sv3b/130/83', cardStyle: 'stacked', prompt: '创建操作教程视频，步骤清晰、画面简洁' },
+    { title: '节日主题',   thumbnail: 'https://picsum.photos/seed/sv4/130/83', overlayImage: 'https://picsum.photos/seed/sv4b/130/83', cardStyle: 'stacked', prompt: '设计节日主题短视频，充满节日氛围与创意' },
+    { title: '美食探店',   thumbnail: 'https://picsum.photos/seed/sv5/130/83', overlayImage: 'https://picsum.photos/seed/sv5b/130/83', cardStyle: 'stacked', prompt: '制作美食探店短视频，展现餐厅环境与菜品' },
+    { title: '旅行Vlog',  thumbnail: 'https://picsum.photos/seed/sv6/130/83', overlayImage: 'https://picsum.photos/seed/sv6b/130/83', cardStyle: 'stacked', prompt: '生成旅行Vlog，记录旅途风景与人文体验' },
   ],
   '直播间模版': [
-    { title: '电商直播',   thumbnail: 'https://picsum.photos/seed/lv1/130/83', prompt: '搭建电商直播间背景，突出商品与促销信息' },
-    { title: '游戏直播',   thumbnail: 'https://picsum.photos/seed/lv2/130/83', prompt: '设计游戏直播间场景，沉浸感强、界面清晰' },
-    { title: '教学直播',   thumbnail: 'https://picsum.photos/seed/lv3/130/83', prompt: '创建教学直播间布局，板书区域与互动区分明' },
-    { title: '活动直播',   thumbnail: 'https://picsum.photos/seed/lv4/130/83', prompt: '搭建活动直播场景，舞台感强、品牌露出清晰' },
+    { title: '电商直播',   thumbnail: 'https://picsum.photos/seed/live1b/130/83', overlayImage: liveImg1, cardStyle: 'stacked', prompt: '搭建电商直播间背景，突出商品与促销信息' },
+    { title: '游戏直播',   thumbnail: 'https://picsum.photos/seed/live2b/130/83', overlayImage: liveImg2, cardStyle: 'stacked', prompt: '设计游戏直播间场景，沉浸感强、界面清晰' },
+    { title: '教学直播',   thumbnail: 'https://picsum.photos/seed/live3b/130/83', overlayImage: liveImg3, cardStyle: 'stacked', prompt: '创建教学直播间布局，板书区域与互动区分明' },
+    { title: '活动直播',   thumbnail: 'https://picsum.photos/seed/live4b/130/83', overlayImage: liveImg4, cardStyle: 'stacked', prompt: '搭建活动直播场景，舞台感强、品牌露出清晰' },
+    { title: '教育直播',   thumbnail: 'https://picsum.photos/seed/live5b/130/83', overlayImage: liveImg5, cardStyle: 'stacked', prompt: '制作教育直播间场景，专业感强、知识氛围浓厚' },
   ],
   '图片': [
-    { title: '社交媒体',   thumbnail: 'https://picsum.photos/seed/img1/130/83', prompt: '生成社交媒体配图，风格年轻活泼、视觉冲击力强' },
-    { title: '海报设计',   thumbnail: 'https://picsum.photos/seed/img2/130/83', prompt: '设计活动海报，主题突出、排版层次分明' },
-    { title: '名片模版',   thumbnail: 'https://picsum.photos/seed/img3/130/83', prompt: '创建个人名片，简洁专业、信息完整' },
-    { title: 'PPT封面',   thumbnail: 'https://picsum.photos/seed/img4/130/83', prompt: '设计PPT封面，商务质感、标题醒目' },
+    { title: '社交媒体',   thumbnail: 'https://picsum.photos/seed/img1/130/83', overlayImage: liveImg1, cardStyle: 'stacked', prompt: '生成社交媒体配图，风格年轻活泼、视觉冲击力强' },
+    { title: '海报设计',   thumbnail: 'https://picsum.photos/seed/img2/130/83', overlayImage: liveImg1, cardStyle: 'stacked', prompt: '设计活动海报，主题突出、排版层次分明' },
+    { title: '名片模版',   thumbnail: 'https://picsum.photos/seed/img3/130/83', overlayImage: liveImg1, cardStyle: 'stacked', prompt: '创建个人名片，简洁专业、信息完整' },
+    { title: 'PPT封面',   thumbnail: 'https://picsum.photos/seed/img4/130/83', overlayImage: liveImg1, cardStyle: 'stacked', prompt: '设计PPT封面，商务质感、标题醒目' },
   ],
-  '视频': [
-    { title: 'Vlog模版',   thumbnail: 'https://picsum.photos/seed/vid1/130/83', prompt: '生成Vlog模版，轻松自然的叙事节奏' },
-    { title: 'MV模版',    thumbnail: 'https://picsum.photos/seed/vid2/130/83', prompt: '制作MV风格视频，画面节奏与音乐契合' },
-    { title: '广告模版',   thumbnail: 'https://picsum.photos/seed/vid3/130/83', prompt: '创建广告短片模版，品牌植入自然、转化导向' },
-    { title: '纪录片',    thumbnail: 'https://picsum.photos/seed/vid4/130/83', prompt: '设计纪录片模版，叙事沉稳、画面真实' },
+  '战报模版': [
+    { title: '赛事战报',   thumbnail: 'https://picsum.photos/seed/zb1/130/83', overlayImage: zbImg1, cardStyle: 'stacked', prompt: '生成赛事战报模版，数据可视化清晰、竞技感强' },
+    { title: '销售战报',   thumbnail: 'https://picsum.photos/seed/zb2/130/83', overlayImage: zbImg2, cardStyle: 'stacked', prompt: '制作销售战报，突出业绩数据与增长趋势' },
+    { title: '运营日报',   thumbnail: 'https://picsum.photos/seed/zb3/130/83', overlayImage: zbImg3, cardStyle: 'stacked', prompt: '创建运营日报模版，数据汇总清晰、一目了然' },
+    { title: '活动战报',   thumbnail: 'https://picsum.photos/seed/zb4/130/83', overlayImage: zbImg4, cardStyle: 'stacked', prompt: '设计活动战报，展现活动成果与用户参与数据' },
   ],
 }
 
@@ -82,6 +86,15 @@ import tagLiveStream from '@/assets/icons/模版icon/直播间.svg'
 import tagImage from '@/assets/icons/模版icon/图片.svg'
 import tagVideo from '@/assets/icons/模版icon/视频.svg'
 import geminiIcon from '@/assets/icons/模版icon/gemini.png'
+import liveImg1 from '@/assets/images/模版/直播间/screenshot-20260512-170332.png'
+import liveImg2 from '@/assets/images/模版/直播间/screenshot-20260512-171221.png'
+import liveImg3 from '@/assets/images/模版/直播间/screenshot-20260513-161832.png'
+import liveImg4 from '@/assets/images/模版/直播间/screenshot-20260513-161949.png'
+import liveImg5 from '@/assets/images/模版/直播间/screenshot-20260513-162051.png'
+import zbImg1 from '@/assets/images/模版/战报/screenshot-20260511-192355.png'
+import zbImg2 from '@/assets/images/模版/战报/screenshot-20260511-192506.png'
+import zbImg3 from '@/assets/images/模版/战报/screenshot-20260511-192557.png'
+import zbImg4 from '@/assets/images/模版/战报/screenshot-20260511-192717.png'
 function IconSend({ active }: { active?: boolean }) {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -197,8 +210,8 @@ function Sidebar({
             top: 0,
             left: '50%',
             transform: 'translateX(-50%)',
-            width: 36,
-            height: 36,
+            width: 32,
+            height: 32,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -386,6 +399,262 @@ function Sidebar({
         )}
       </div>
     </aside>
+  )
+}
+
+// ─── 二级模版卡片（3D tilt 效果） ───
+function SubTemplateCard({
+  card,
+  index,
+  isSelected,
+  cardW,
+  cardH,
+  onClick,
+}: {
+  card: SubCard
+  index: number
+  isSelected: boolean
+  cardW: number
+  cardH: number
+  onClick: () => void
+}) {
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+  const springConfig = { damping: 15, stiffness: 150 }
+  const springX = useSpring(mouseX, springConfig)
+  const springY = useSpring(mouseY, springConfig)
+  const rotateX = useTransform(springY, [-0.5, 0.5], ['8deg', '-8deg'])
+  const rotateY = useTransform(springX, [-0.5, 0.5], ['-8deg', '8deg'])
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const xPct = (e.clientX - rect.left) / rect.width - 0.5
+    const yPct = (e.clientY - rect.top) / rect.height - 0.5
+    mouseX.set(xPct)
+    mouseY.set(yPct)
+  }
+
+  const handleMouseLeave = () => {
+    mouseX.set(0)
+    mouseY.set(0)
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25, delay: index * 0.05 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onClick={onClick}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: 'preserve-3d',
+        flexShrink: 0,
+        width: cardW,
+        height: cardH,
+        borderRadius: 16,
+        cursor: 'pointer',
+        filter: isSelected
+          ? 'drop-shadow(0 0 0 2px #3B82F6) drop-shadow(0 8px 24px rgba(0,0,0,0.18))'
+          : 'drop-shadow(0 2px 12px rgba(0,0,0,0.12))',
+        border: '1px solid rgba(0,0,0,0.08)',
+        background: 'transparent',
+      }}
+    >
+      {/* Inner content raised in Z */}
+      <div
+        style={{
+          transform: 'translateZ(30px)',
+          transformStyle: 'preserve-3d',
+          position: 'absolute',
+          inset: 6,
+          borderRadius: 12,
+          overflow: 'hidden',
+        }}
+      >
+        {/* Background image */}
+        <img
+          src={card.thumbnail}
+          alt={card.title}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+        {/* Dark gradient overlay */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 45%, rgba(0,0,0,0.65) 100%)',
+        }} />
+        {/* Header: title + arrow button */}
+        <div style={{
+          position: 'absolute',
+          top: 0, left: 0, right: 0,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          padding: '10px 10px 0',
+        }}>
+          <div style={{ transform: 'translateZ(20px)' }}>
+            <div style={{
+              fontSize: 12,
+              fontWeight: 700,
+              color: '#FFFFFF',
+              lineHeight: '16px',
+              fontFamily: "'PingFang SC', sans-serif",
+            }}>
+              {card.title}
+            </div>
+          </div>
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            style={{
+              transform: 'translateZ(30px)',
+              width: 24,
+              height: 24,
+              borderRadius: '50%',
+              background: 'rgba(255,255,255,0.2)',
+              backdropFilter: 'blur(4px)',
+              border: '1px solid rgba(255,255,255,0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+            }}
+          >
+            <ArrowUpRight size={13} color="#fff" />
+          </motion.div>
+        </div>
+        {/* Footer button */}
+        <motion.div
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          style={{
+            position: 'absolute',
+            bottom: 10,
+            left: 10,
+            right: 10,
+            transform: 'translateZ(20px)',
+            borderRadius: 8,
+            padding: '6px 8px',
+            textAlign: 'center',
+            fontSize: 11,
+            fontWeight: 600,
+            color: '#FFFFFF',
+            fontFamily: "'PingFang SC', sans-serif",
+            background: 'rgba(255,255,255,0.12)',
+            backdropFilter: 'blur(8px)',
+            border: '1px solid rgba(255,255,255,0.2)',
+            cursor: 'pointer',
+          }}
+        >
+          使用模版
+        </motion.div>
+      </div>
+    </motion.div>
+  )
+}
+
+// ─── 叠图样式卡片 ───
+function StackedTemplateCard({
+  card,
+  index,
+  isSelected,
+  cardW,
+  cardH,
+  onClick,
+}: {
+  card: SubCard
+  index: number
+  isSelected: boolean
+  cardW: number
+  cardH: number
+  onClick: () => void
+}) {
+  const [hovered, setHovered] = React.useState(false)
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25, delay: index * 0.05 }}
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        flexShrink: 0,
+        width: cardW,
+        height: cardH,
+        borderRadius: 16,
+        cursor: 'pointer',
+        background: isSelected ? '#ECEDF0' : '#F7F7F8',
+        border: isSelected ? '0.5px solidrgb(122, 122, 122)' : '0.5px solid #E4E4E7',
+        display: 'flex',
+        flexDirection: 'column',
+        padding: 12,
+        boxSizing: 'border-box',
+        transition: 'background 0.2s, border-color 0.2s',
+      }}
+    >
+      {/* 图片叠放区 */}
+      <div style={{
+        flex: 1,
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+      }}>
+        {/* 后图 */}
+        <motion.img
+          src={card.thumbnail}
+          alt={card.title}
+          animate={{
+            rotate: hovered ? -10 : -6,
+            scale: hovered ? 1.05 : 1,
+          }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          style={{
+            position: 'absolute',
+            width: 88,
+            height: 88,
+            objectFit: 'cover',
+            borderRadius: 10,
+            boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+          }}
+        />
+        {/* 前图 */}
+        <motion.img
+          src={card.overlayImage || card.thumbnail}
+          alt={card.title}
+          animate={{
+            rotate: hovered ? 5 : 3,
+            scale: hovered ? 1.05 : 1,
+          }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          style={{
+            position: 'absolute',
+            width: 88,
+            height: 88,
+            objectFit: 'cover',
+            borderRadius: 10,
+            boxShadow: '0 4px 12px rgba(0,0,0,0.22)',
+          }}
+        />
+      </div>
+      {/* 标题 */}
+      <div style={{
+        fontSize: 12,
+        fontWeight: 500,
+        color: '#1a1a1a',
+        lineHeight: '18px',
+        fontFamily: "'PingFang SC', sans-serif",
+        marginTop: 8,
+        flexShrink: 0,
+      }}>
+        {card.title}
+      </div>
+    </motion.div>
   )
 }
 
@@ -600,7 +869,7 @@ export default function LandingPage() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          paddingTop: 'clamp(240px, 12vw, 240px)',
+          paddingTop: 'clamp(240px, 12vw, 240px)', /* 在这里调整距离顶部的高度 */
           paddingLeft: 'clamp(24px, 6vw, 88px)',
           paddingRight: 'clamp(24px, 6vw, 88px)',
           paddingBottom: 48,
@@ -718,7 +987,7 @@ export default function LandingPage() {
                 position: 'relative',
                 boxSizing: 'border-box',
                 width: '100%',
-                maxWidth: 880,
+                maxWidth: 768,
                 minHeight: 140,
               maxHeight: INPUT_BOX_MAX_HEIGHT,
                 background: '#FFFFFF',
@@ -741,7 +1010,7 @@ export default function LandingPage() {
                   flexDirection: 'row',
                   alignItems: 'flex-start',
                   padding: '0 4px 0 0',
-                  gap: 3,
+                  gap: 4,
                   overflow: 'visible',
                 }}
               >
@@ -1011,7 +1280,7 @@ export default function LandingPage() {
                       onClick={() => setShowFormatDropdown(v => !v)}
                       style={{
                         boxSizing: 'border-box',
-                        width: 74, height: 36,
+                        width: 'fit-content', minWidth: 64, height: 36,
                         padding: '6px 12px',
                         border: '1px solid #EBEBEB', borderRadius: 29,
                         background: '#FFFFFF',
@@ -1378,7 +1647,7 @@ export default function LandingPage() {
               <TagButton label="短视频模版" iconSrc={tagShortVideo} onClick={() => handleTagClick('短视频模版')} />
               <TagButton label="直播间模版" iconSrc={tagLiveStream} onClick={() => handleTagClick('直播间模版')} />
               <TagButton label="图片" iconSrc={tagImage} onClick={() => handleTagClick('图片')} />
-              <TagButton label="视频" iconSrc={tagVideo} onClick={() => handleTagClick('视频')} />
+              <TagButton label="战报模版" iconSrc={tagVideo} onClick={() => handleTagClick('战报模版')} />
               {/* 更多模版按钮 + 下拉菜单 */}
               <div ref={moreTemplateBtnRef} style={{ position: 'relative' }}>
                 <TagButton label="更多模板" onClick={() => setShowMoreTemplateMenu(v => !v)} />
@@ -1538,21 +1807,17 @@ export default function LandingPage() {
           {/* ── 二级模版弹出面板 ── */}
           {activeTag && TAG_SUB_TEMPLATES[activeTag] && (() => {
             const subCards = TAG_SUB_TEMPLATES[activeTag]!
-            const CARD_W = 206        // 卡片宽度
-            const CARD_GAP = 8        // 卡片间距
-            const needScroll = subCards.length > 4
+            const CARD_W = 144
+            const CARD_H = 196
+            const CARD_GAP = 12
+            const needScroll = subCards.length > 5
 
             const scrollBy = (dir: 'left' | 'right') => {
               if (!subScrollRef.current) return
-              // 每次滚 4 张：让当前半露的卡片成为下一屏起点
-              const step = (CARD_W + CARD_GAP) * 4
-              subScrollRef.current.scrollBy({
-                left: dir === 'right' ? step : -step,
-                behavior: 'smooth',
-              })
+              const step = (CARD_W + CARD_GAP) * 5
+              subScrollRef.current.scrollBy({ left: dir === 'right' ? step : -step, behavior: 'smooth' })
             }
 
-            // 是否已到达右端（留 1px 容差避免浮点误差）
             const atRightEnd = (() => {
               const el = subScrollRef.current
               if (!el) return false
@@ -1566,220 +1831,123 @@ export default function LandingPage() {
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 style={{
-                  marginTop: 16,
+                  marginTop: 8,
+                  width: 768,
                   display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
                   gap: 8,
-                  /* 宽度跟输入框对齐，但限制最大可见宽度为 4.5 张卡片 + 2 个箭头 */
-                  width: '100%',
-                  maxWidth: needScroll ? (32 + 8 + (CARD_W * 4.5 + CARD_GAP * 4) + 8 + 32) : undefined,
-                  alignSelf: needScroll ? undefined : 'center',
                 }}
               >
-                {/* 左箭头：始终占位，到最左端时隐藏（保持布局稳定） */}
-                {needScroll && (
-                  <motion.button
-                    whileHover={subScrollLeft > 0 ? { backgroundColor: '#F0F0F0' } : {}}
-                    whileTap={subScrollLeft > 0 ? { scale: 0.92 } : {}}
-                    onClick={() => subScrollLeft > 0 && scrollBy('left')}
-                    style={{
-                      flexShrink: 0,
-                      width: 32, height: 32,
-                      borderRadius: '50%',
-                      border: '1px solid #E9E9E9',
-                      background: '#FFFFFF',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      cursor: subScrollLeft > 0 ? 'pointer' : 'default',
-                      padding: 0,
-                      /* 到最左端时视觉隐藏，但仍占据空间 */
-                      visibility: subScrollLeft > 0 ? 'visible' : 'hidden',
-                      pointerEvents: subScrollLeft > 0 ? 'auto' : 'none',
-                    }}
-                  >
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M10 3L5 8L10 13" stroke="#0E0E0E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </motion.button>
-                )}
+                {/* 标题行：左侧「浏览灵感」+ 右侧左右箭头 */}
+                <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 400, fontSize: 16, lineHeight: '24px', color: '#000000' }}>
+                    浏览灵感
+                  </span>
+                  <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                    {/* 左箭头 */}
+                    <motion.button
+                      onClick={() => subScrollLeft > 0 && scrollBy('left')}
+                      disabled={subScrollLeft <= 0}
+                      whileHover={subScrollLeft > 0 ? { backgroundColor: '#F5F5F7', borderColor: '#D0D0D5' } : {}}
+                      whileTap={subScrollLeft > 0 ? { scale: 0.92 } : {}}
+                      style={{
+                        width: 28, height: 28, borderRadius: '50%',
+                        border: '1px solid #E4E4E7',
+                        background: '#FFFFFF',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        cursor: subScrollLeft > 0 ? 'pointer' : 'not-allowed',
+                        padding: 0,
+                        opacity: subScrollLeft > 0 ? 1 : 0.3,
+                        transition: 'opacity 0.2s',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <svg width="6" height="10" viewBox="0 0 6 10" fill="none">
+                        <path d="M5 1L1 5L5 9" stroke={subScrollLeft > 0 ? '#505050' : '#B4B4B4'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </motion.button>
+                    {/* 右箭头 */}
+                    <motion.button
+                      onClick={() => !atRightEnd && scrollBy('right')}
+                      disabled={atRightEnd}
+                      whileHover={!atRightEnd ? { backgroundColor: '#F5F5F7', borderColor: '#D0D0D5' } : {}}
+                      whileTap={!atRightEnd ? { scale: 0.92 } : {}}
+                      style={{
+                        width: 28, height: 28, borderRadius: '50%',
+                        border: '1px solid #E4E4E7',
+                        background: '#FFFFFF',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        cursor: !atRightEnd ? 'pointer' : 'not-allowed',
+                        padding: 0,
+                        opacity: !atRightEnd ? 1 : 0.3,
+                        transition: 'opacity 0.2s',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <svg width="6" height="10" viewBox="0 0 6 10" fill="none">
+                        <path d="M1 1L5 5L1 9" stroke={!atRightEnd ? '#505050' : '#B4B4B4'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </motion.button>
+                  </div>
+                </div>
 
-                {/* 卡片滚动容器（外层包裹用于渐变 mask） */}
-                {(() => {
-                  // 根据滚动位置决定左右渐变：在边界时该侧不渐变
-                  const fadeW = 40  // 渐变宽度 px
-                  const leftFade  = needScroll && subScrollLeft > 0
-                  const rightFade = needScroll && !atRightEnd
-                  const leftStop  = leftFade  ? `transparent 0%, black ${fadeW}px` : 'black 0%'
-                  const rightStop = rightFade ? `black calc(100% - ${fadeW}px), transparent 100%` : 'black 100%'
-                  const maskValue = `linear-gradient(to right, ${leftStop}, ${rightStop})`
-
-                  return (
-                    <div style={{
-                      flex: 1,
-                      /* padding 给 hover shadow 留空间，负 margin 抵消占位 */
-                      paddingTop: 8,
-                      paddingBottom: 8,
-                      marginTop: -8,
-                      marginBottom: -8,
-                      /* overflow hidden 裁剪左右溢出，但上下靠 padding 撑开 */
-                      overflowX: needScroll ? 'hidden' : 'visible',
-                      overflowY: 'visible',
-                      WebkitMaskImage: maskValue,
-                      maskImage: maskValue,
-                    }}>
-                      <div
-                        ref={subScrollRef}
-                        onScroll={(e) => setSubScrollLeft(e.currentTarget.scrollLeft)}
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          gap: CARD_GAP,
-                          flexWrap: needScroll ? 'nowrap' : 'wrap',
-                          overflowX: needScroll ? 'scroll' : 'visible',
-                          overflowY: 'visible',
-                          justifyContent: needScroll ? 'flex-start' : 'center',
-                          scrollbarWidth: 'none',
-                          paddingTop: 8,
-                          paddingBottom: 8,
-                          marginTop: -8,
-                          marginBottom: -8,
-                        }}
-                      >
-                        {subCards.map((card, i) => (
-                          <motion.div
+                {/* 卡片行 */}
+                <div
+                  ref={subScrollRef}
+                  onScroll={(e) => setSubScrollLeft(e.currentTarget.scrollLeft)}
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: CARD_GAP,
+                    overflowX: needScroll ? 'scroll' : 'visible',
+                    scrollbarWidth: 'none',
+                    paddingBottom: 8,
+                    paddingTop: 8,
+                  }}
+                >
+                    {subCards.map((card, i) => {
+                      const isSelected = activeSubCard === card.title
+                      const handleClick = () => {
+                        setActiveSubCard(card.title)
+                        promptRef.current = card.prompt
+                        setPrompt(card.prompt)
+                        const tplAtt = { id: `tpl-${card.title}`, type: 'template', thumbnail: card.thumbnail, name: card.title }
+                        setAttachments(prev => {
+                          const filtered = prev.filter(a => a.type !== 'template')
+                          return [...filtered, tplAtt]
+                        })
+                        const fileAtts = attachments.filter(a => a.type !== 'template')
+                        rebuildEditorForTemplate([...fileAtts, tplAtt], card.prompt)
+                      }
+                      if (card.cardStyle === 'stacked') {
+                        return (
+                          <StackedTemplateCard
                             key={card.title}
-                            initial={{ opacity: 0, y: 8 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.25, delay: i * 0.06 }}
-                            whileHover={{ y: -2, boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}
-                            onClick={() => {
-                              setActiveSubCard(card.title)
-                              promptRef.current = card.prompt
-                              setPrompt(card.prompt)
-                              const tplAtt = { id: `tpl-${card.title}`, type: 'template', thumbnail: card.thumbnail, name: card.title }
-                              setAttachments(prev => {
-                                const filtered = prev.filter(a => a.type !== 'template')
-                                return [...filtered, tplAtt]
-                              })
-                              // 模版选中：直接重建编辑器内容
-                              const fileAtts = attachments.filter(a => a.type !== 'template')
-                              rebuildEditorForTemplate([...fileAtts, tplAtt], card.prompt)
-                            }}
-                            style={{
-                              boxSizing: 'border-box',
-                              width: CARD_W,
-                              height: 84,
-                              background: activeSubCard === card.title ? '#F5F5F7' : '#FFFFFF',
-                              border: activeSubCard === card.title ? '1.5px solid #0E0E0E' : '1px solid #E9E9E9',
-                              borderRadius: 16,
-                              display: 'flex',
-                              flexDirection: 'row-reverse',
-                              justifyContent: 'flex-end',
-                              alignItems: 'center',
-                              padding: '12px 16px 12px 16px',
-                              gap: 8,
-                              cursor: 'pointer',
-                              flexShrink: 0,
-                              position: 'relative',
-                              overflow: 'hidden',
-                            }}
-                          >
-                            {/* 左侧缩略图区域 */}
-                            <div
-                              style={{
-                                position: 'absolute',
-                                left: 20, top: 0,
-                                width: 110, height: 83,
-                              }}
-                            >
-                              <img
-                                src={card.thumbnail}
-                                alt={card.title}
-                                style={{
-                                  position: 'absolute',
-                                  width: 65, height: 113,
-                                  left: 3, top: 7,
-                                  borderRadius: 8,
-                                  transform: 'rotate(-9.51deg)',
-                                  filter: 'drop-shadow(0px 4px 6px rgba(0,0,0,0.25))',
-                                  objectFit: 'cover',
-                                }}
-                              />
-                              <img
-                                src={card.thumbnail}
-                                alt=""
-                                style={{
-                                  position: 'absolute',
-                                  width: 58, height: 103,
-                                  left: 40, top: 18,
-                                  borderRadius: 8,
-                                  transform: 'rotate(5.88deg)',
-                                  border: '0.4px solid #FFFFFF',
-                                  filter: 'drop-shadow(0px 4px 6px rgba(0,0,0,0.25))',
-                                  objectFit: 'cover',
-                                }}
-                              />
-                            </div>
-
-                            {/* 右侧标题 */}
-                            <div
-                              style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'flex-end',
-                                alignItems: 'flex-start',
-                                gap: 8,
-                                width: 56,
-                                height: 20,
-                                flexShrink: 0,
-                                marginLeft: 'auto',
-                              }}
-                            >
-                              <span
-                                style={{
-                                  fontFamily: "'Outfit', sans-serif",
-                                  fontWeight: 400,
-                                  fontSize: 14,
-                                  lineHeight: '20px',
-                                  color: '#000000',
-                                  whiteSpace: 'nowrap',
-                                }}
-                              >
-                                {card.title}
-                              </span>
-                            </div>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-                  )
-                })()}
-
-                {/* 右箭头：始终占位，到最右端时隐藏（保持布局稳定） */}
-                {needScroll && (
-                  <motion.button
-                    whileHover={!atRightEnd ? { backgroundColor: '#F0F0F0' } : {}}
-                    whileTap={!atRightEnd ? { scale: 0.92 } : {}}
-                    onClick={() => !atRightEnd && scrollBy('right')}
-                    style={{
-                      flexShrink: 0,
-                      width: 32, height: 32,
-                      borderRadius: '50%',
-                      border: '1px solid #E9E9E9',
-                      background: '#FFFFFF',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      cursor: !atRightEnd ? 'pointer' : 'default',
-                      padding: 0,
-                      /* 到最右端时视觉隐藏，但仍占据空间 */
-                      visibility: !atRightEnd ? 'visible' : 'hidden',
-                      pointerEvents: !atRightEnd ? 'auto' : 'none',
-                    }}
-                  >
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M6 3L11 8L6 13" stroke="#0E0E0E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </motion.button>
-                )}
+                            card={card}
+                            index={i}
+                            isSelected={isSelected}
+                            cardW={CARD_W}
+                            cardH={CARD_H}
+                            onClick={handleClick}
+                          />
+                        )
+                      }
+                      return (
+                        <SubTemplateCard
+                          key={card.title}
+                          card={card}
+                          index={i}
+                          isSelected={isSelected}
+                          cardW={CARD_W}
+                          cardH={CARD_H}
+                          onClick={handleClick}
+                        />
+                      )
+                    })}
+                </div>
               </motion.div>
             )
           })()}
@@ -1861,6 +2029,7 @@ export default function LandingPage() {
           pointer-events: none;
         }
         .landing-textarea:focus { caret-color: #0E0E0E; }
+        [data-card]:hover .card-gradient-overlay { opacity: 0.4; }
       `}</style>
     </div>
   )

@@ -1,129 +1,117 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import Dither from '@/components/webgl/Dither'
+import { useEffect, useState } from 'react'
+import Dither, { ditherScrollRef, ditherMouseRef } from '@/components/webgl/Dither'
 import SplashHeader from '@/components/layout/SplashHeader'
+import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import Section1 from './Section1'
+import Section2 from './Section2'
+import Section3ScrollEffect from './Section3ScrollEffect'
+import Section4 from './Section4'
+import Section5v2 from './Section5v2'
+import Section6v2 from './Section6v2'
 
 export default function SplashScreen() {
   const navigate = useNavigate()
-  const [exiting, setExiting] = useState(false)
-  const [dParams, setDParams] = useState({
-    waveSpeed: 0.08,
-    waveFrequency: 2,
-    waveAmplitude: 0.18,
-    waveColor: [0.435, 0.435, 0.435] as [number, number, number],
-    colorNum: 4.3,
-    pixelSize: 3,
-    disableAnimation: false,
-    enableMouseInteraction: true,
-    mouseRadius: 0.4,
-  })
+  const [headerBg, setHeaderBg] = useState(false)
+  const [headerTheme, setHeaderTheme] = useState<'dark' | 'light' | number>('dark')
 
-  const handleGetStarted = () => {
-    setExiting(true)
-  }
+  useEffect(() => {
+    const handleScroll = () => {
+      const progress = Math.min(window.scrollY / (window.innerHeight * 0.8), 1)
+      ditherScrollRef.current = progress
+      setHeaderBg(progress >= 1)
+
+      // Section5v2 主题联动：背景从黑→白时 header 跟随变色
+      const s5v2 = document.getElementById('section5v2')
+      if (s5v2) {
+        const rect = s5v2.getBoundingClientRect()
+        const totalH = s5v2.offsetHeight
+        const scrolled = -rect.top
+        const sectionProgress = Math.max(0, Math.min(1, scrolled / totalH))
+        const t = Math.max(0, Math.min(1, sectionProgress / 0.5))
+        if (scrolled >= 0 && scrolled <= totalH) {
+          setHeaderTheme(t)
+        } else if (scrolled < 0) {
+          setHeaderTheme('dark')
+        } else {
+          setHeaderTheme('light')
+        }
+      }
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      ditherMouseRef.current = { x: e.clientX, y: e.clientY }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('mousemove', handleMouseMove)
+      ditherScrollRef.current = 0
+    }
+  }, [])
+
+  const themeT = typeof headerTheme === 'number' ? headerTheme : headerTheme === 'light' ? 1 : 0
 
   return (
-    <AnimatePresence
-      onExitComplete={() => navigate('/home')}
-    >
-      {!exiting && (
-        <motion.div
-          key="splash"
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center"
-          style={{ background: '#08080f' }}
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
-        >
-          {/* 调试控制面板（将 false 改为 true 以启用调试）*/}
-          {false && (
-            <div style={{ position: 'fixed', top: 10, right: 10, zIndex: 999, background: 'rgba(0,0,0,0.75)', padding: '12px 16px', borderRadius: 10, color: '#fff', fontSize: 12, minWidth: 220, display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <div style={{ fontWeight: 600, marginBottom: 4 }}>Dither 参数调试</div>
-              {([
-                { key: 'waveSpeed', min: 0, max: 1, step: 0.01 },
-                { key: 'waveFrequency', min: 0.5, max: 10, step: 0.1 },
-                { key: 'waveAmplitude', min: 0, max: 1, step: 0.01 },
-                { key: 'colorNum', min: 2, max: 16, step: 0.1 },
-                { key: 'pixelSize', min: 1, max: 10, step: 0.5 },
-                { key: 'mouseRadius', min: 0, max: 3, step: 0.05 },
-              ] as { key: keyof typeof dParams; min: number; max: number; step: number }[]).map(({ key, min, max, step }) => (
-                <label key={key} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  <span>{key}: {(dParams[key] as number).toFixed(2)}</span>
-                  <input type="range" min={min} max={max} step={step} value={dParams[key] as number}
-                    onChange={e => setDParams(p => ({ ...p, [key]: +e.target.value }))} style={{ width: '100%' }} />
-                </label>
-              ))}
-              <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <input type="checkbox" checked={dParams.disableAnimation}
-                  onChange={e => setDParams(p => ({ ...p, disableAnimation: e.target.checked }))} />
-                disableAnimation
-              </label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <input type="checkbox" checked={dParams.enableMouseInteraction}
-                  onChange={e => setDParams(p => ({ ...p, enableMouseInteraction: e.target.checked }))} />
-                enableMouseInteraction
-              </label>
-            </div>
-          )}
-
-          {/* Dither 背景 */}
-          <div className="absolute inset-0">
-            <Dither {...dParams} />
-          </div>
-
-          {/* 顶部 Header */}
-          <SplashHeader />
-
-          {/* 中间大文案 + 按钮 */}
-          <motion.div
-            className="relative z-10 flex flex-col items-center gap-5 select-none"
-            style={{ pointerEvents: 'none' }}
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: 'easeOut', delay: 0.3 }}
+    <div style={{ background: '#08080f' }}>
+      {/* 固定顶部 Header */}
+      <SplashHeader
+        showBackground={headerBg}
+        theme={headerTheme}
+        right={
+          <motion.button
+            onClick={() => navigate('/home')}
+            className="group relative overflow-hidden rounded-2xl font-medium text-sm"
+            style={{
+              width: 100,
+              height: 38,
+              background: themeT > 0.5 ? '#111111' : '#FFFFFF',
+              color: themeT > 0.5 ? '#FFFFFF' : '#111111',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'background 0.3s ease, color 0.3s ease',
+            }}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
           >
-            <h1
-              className="text-6xl font-bold text-center leading-tight"
-              style={{ color: '#f0f0f5', letterSpacing: '-0.01em' }}
-            >
-              灵感, 即画面
-            </h1>
-            <p
-              className="text-l text-center"
-              style={{ color: 'rgba(240,240,245,0.55)', letterSpacing: '0.02em' }}
-            >
-              让好创意，更快被看见
-            </p>
+            <motion.div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{ background: 'rgba(0,0,0,0.06)' }}
+            />
+            <span className="relative">开始创作</span>
+          </motion.button>
+        }
+      />
 
-            {/* 开始按钮 */}
-            <motion.button
-              onClick={handleGetStarted}
-              className="group relative overflow-hidden rounded-3xl font-medium text-sm tracking-wide"
-              style={{
-                pointerEvents: 'auto',
-                width: 164,
-                height: 58,
-                background: '#FFFFFF',
-                color: '#111111',
-                border: 'none',
-                marginTop: 36,
-              }}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-            >
-              <motion.div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ background: 'rgba(0,0,0,0.06)' }}
-              />
-              <span className="relative flex items-center justify-center gap-2 text-base font-semibold">
-                即刻开始
-              </span>
-            </motion.button>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+      {/* Dither 背景：fixed 不随滚动移动，颜色随滚动衰减至黑 */}
+      <div className="fixed inset-0" style={{ zIndex: 0, pointerEvents: 'none' }}>
+        <Dither
+          waveSpeed={0.08}
+          waveFrequency={2}
+          waveAmplitude={0.18}
+          waveColor={[0.435, 0.435, 0.435]}
+          colorNum={4.3}
+          pixelSize={3}
+          disableAnimation={false}
+          enableMouseInteraction={true}
+          mouseRadius={0.4}
+        />
+      </div>
+
+      <Section1 />
+      <Section2 />
+      <Section3ScrollEffect />
+      <Section4 title="更多素材, 一键互联" archiveButton={{ text: '查看全部', href: '/home' }} />
+
+      {/* Section5v2：滚动展开媒体动效，背景从透明→白 */}
+      <Section5v2 />
+
+      {/* 白色背景区域 */}
+      <div style={{ background: '#FFFFFF', position: 'relative', zIndex: 1 }}>
+        <Section6v2 />
+      </div>
+    </div>
   )
 }

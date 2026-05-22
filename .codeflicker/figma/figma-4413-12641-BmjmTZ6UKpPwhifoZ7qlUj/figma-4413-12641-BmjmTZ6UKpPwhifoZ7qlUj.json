@@ -1,0 +1,218 @@
+{
+  "id": "4413:12641",
+  "nodeType": "view",
+  "styles": {
+    "boxSizing": "border-box",
+    "overflow": "hidden",
+    "width": "768px",
+    "height": "244px",
+    "display": "flex",
+    "flexDirection": "column",
+    "justifyContent": "normal",
+    "padding": "0px",
+    "gap": "20px"
+  },
+  "zIndex": 1,
+  "children": [
+    {
+      "id": "4413:12642",
+      "nodeType": "view",
+      "styles": {
+        "boxSizing": "border-box",
+        "flexBasis": "28px",
+        "width": "768px",
+        "height": "28px",
+        "alignSelf": "stretch",
+        "display": "flex",
+        "justifyContent": "space-between",
+        "alignItems": "center",
+        "padding": "0px"
+      },
+      "zIndex": 1,
+      "children": [
+        {
+          "id": "4413:12643",
+          "nodeType": "text",
+          "styles": {
+            "boxSizing": "border-box",
+            "minWidth": "64px",
+            "verticalAlign": "top",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "fontFamily": "Outfit",
+            "fontWeight": "400",
+            "color": "#000000"
+          },
+          "zIndex": 1,
+          "characters": "浏览灵感"
+        },
+        {
+          "id": "4413:12644",
+          "nodeType": "view",
+          "styles": {
+            "boxSizing": "border-box",
+            "flexBasis": "68px",
+            "width": "68px",
+            "height": "28px",
+            "display": "flex",
+            "justifyContent": "normal",
+            "alignItems": "center",
+            "padding": "0px",
+            "gap": "12px"
+          },
+          "zIndex": 2,
+          "children": [
+            {
+              "id": "4413:12645",
+              "nodeType": "image",
+              "styles": {
+                "boxSizing": "border-box",
+                "flexBasis": "28px",
+                "width": "28px",
+                "height": "28px"
+              },
+              "zIndex": 1,
+              "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/e9586cfd-7550-4704-9b2e-70259f375e3f"
+            },
+            {
+              "id": "4413:12649",
+              "nodeType": "image",
+              "styles": {
+                "boxSizing": "border-box",
+                "flexBasis": "28px",
+                "width": "28px",
+                "height": "28px"
+              },
+              "zIndex": 2,
+              "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/ae015a42-47a4-4c88-9b2e-eef5b6a4f536"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4413:12653",
+      "nodeType": "view",
+      "styles": {
+        "boxSizing": "border-box",
+        "flexBasis": "196px",
+        "width": "768px",
+        "height": "196px",
+        "alignSelf": "stretch",
+        "display": "flex",
+        "justifyContent": "normal",
+        "alignItems": "center",
+        "padding": "0px",
+        "gap": "12px"
+      },
+      "zIndex": 2,
+      "children": [
+        {
+          "id": "4598:13817",
+          "nodeType": "image",
+          "styles": {
+            "boxSizing": "border-box",
+            "overflow": "hidden",
+            "flexBasis": "144px",
+            "width": "144px",
+            "height": "196px",
+            "borderRadius": "16px",
+            "background": "#FFFFFF",
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "normal"
+          },
+          "zIndex": 1,
+          "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/a3cd50b7-7b7e-42d6-ae88-360d105d09bb"
+        },
+        {
+          "id": "4598:14155",
+          "nodeType": "image",
+          "styles": {
+            "boxSizing": "border-box",
+            "overflow": "hidden",
+            "flexBasis": "144px",
+            "width": "144px",
+            "height": "196px",
+            "borderRadius": "16px",
+            "background": "#FFFFFF",
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "normal"
+          },
+          "zIndex": 2,
+          "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/3a506b01-1cb5-4fd3-9ffc-93f65ed1b50b"
+        },
+        {
+          "id": "4598:14176",
+          "nodeType": "image",
+          "styles": {
+            "boxSizing": "border-box",
+            "overflow": "hidden",
+            "flexBasis": "144px",
+            "width": "144px",
+            "height": "196px",
+            "borderRadius": "16px",
+            "background": "#FFFFFF",
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "normal"
+          },
+          "zIndex": 3,
+          "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/82a63799-cfbe-4076-9364-963ec30e1faf"
+        },
+        {
+          "id": "4598:14197",
+          "nodeType": "image",
+          "styles": {
+            "boxSizing": "border-box",
+            "overflow": "hidden",
+            "flexBasis": "144px",
+            "width": "144px",
+            "height": "196px",
+            "borderRadius": "16px",
+            "background": "#FFFFFF",
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "normal"
+          },
+          "zIndex": 4,
+          "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/949a0a9d-aeed-4e81-9023-7c882dd656f9"
+        },
+        {
+          "id": "4598:14218",
+          "nodeType": "image",
+          "styles": {
+            "boxSizing": "border-box",
+            "overflow": "hidden",
+            "flexBasis": "144px",
+            "width": "144px",
+            "height": "196px",
+            "borderRadius": "16px",
+            "background": "#FFFFFF",
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "normal"
+          },
+          "zIndex": 5,
+          "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/70946450-88c0-4deb-854f-2094d0588040"
+        },
+        {
+          "id": "4413:13158",
+          "nodeType": "image",
+          "styles": {
+            "boxSizing": "border-box",
+            "overflow": "hidden",
+            "flexBasis": "144px",
+            "width": "144px",
+            "height": "191px",
+            "borderRadius": "12px"
+          },
+          "zIndex": 8,
+          "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/a429e577-3ed3-4ee2-974e-ae45756d7d1b"
+        }
+      ]
+    }
+  ],
+  "originUrl": "https://www.figma.com/design/BmjmTZ6UKpPwhifoZ7qlUj/%E6%B5%81%E5%BD%B1?node-id=4413-12641&t=hhN7Bsv6PPVmYxUZ-4"
+}

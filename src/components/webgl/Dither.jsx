@@ -92,7 +92,8 @@ void main() {
     f -= 0.5 * effect;
   }
   vec3 col = mix(vec3(0.0), waveColor, f);
-  gl_FragColor = vec4(col, 1.0);
+  float alpha = clamp(f * 2.0, 0.0, 1.0);
+  gl_FragColor = vec4(col, alpha);
 }
 `;
 
@@ -160,6 +161,11 @@ class RetroEffectImpl extends Effect {
 
 const WrappedRetro = wrapEffect(RetroEffectImpl);
 
+// 模块级全局 ref，让外部可以直接注入滚动进度，绕开 React props 传递链
+export const ditherScrollRef = { current: 0 };
+// 模块级鼠标位置 ref，通过 window mousemove 更新，绕开 pointerEvents: none 限制
+export const ditherMouseRef = { current: { x: 0, y: 0 } };
+
 const RetroEffect = forwardRef((props, ref) => {
   const { colorNum, pixelSize } = props;
   return <WrappedRetro ref={ref} colorNum={colorNum} pixelSize={pixelSize} />;
@@ -180,6 +186,12 @@ function DitheredWaves({
   const mesh = useRef(null);
   const mouseRef = useRef(new THREE.Vector2());
   const { viewport, size, gl } = useThree();
+
+  // 用 ref 桥接最新 props，解决 useFrame 闭包捕获旧值的问题
+  const propsRef = useRef({ waveSpeed, waveFrequency, waveAmplitude, waveColor, disableAnimation, enableMouseInteraction, mouseRadius });
+  useEffect(() => {
+    propsRef.current = { waveSpeed, waveFrequency, waveAmplitude, waveColor, disableAnimation, enableMouseInteraction, mouseRadius };
+  });
 
   const waveUniformsRef = useRef({
     time: new THREE.Uniform(0),
@@ -204,38 +216,36 @@ function DitheredWaves({
     }
   }, [size, gl]);
 
-  const prevColor = useRef([...waveColor]);
   useFrame(({ clock }) => {
     if (!materialRef.current) return;
     const u = materialRef.current.uniforms;
+    const p = propsRef.current;
 
-    if (!disableAnimation) {
+    if (!p.disableAnimation) {
       u.time.value = clock.getElapsedTime();
     }
 
-    if (u.waveSpeed.value !== waveSpeed) u.waveSpeed.value = waveSpeed;
-    if (u.waveFrequency.value !== waveFrequency) u.waveFrequency.value = waveFrequency;
-    if (u.waveAmplitude.value !== waveAmplitude) u.waveAmplitude.value = waveAmplitude;
+    // 读取全局滚动进度，直接计算颜色和振幅，绕开 React props
+    const sp = ditherScrollRef.current;
+    const baseC = 0.435 * (1 - sp);
+    const baseAmp = 0.18 * (1 - sp);
 
-    if (!prevColor.current.every((v, i) => v === waveColor[i])) {
-      u.waveColor.value.set(...waveColor);
-      prevColor.current = [...waveColor];
-    }
+    u.waveSpeed.value = p.waveSpeed;
+    u.waveFrequency.value = p.waveFrequency;
+    u.waveAmplitude.value = baseAmp;
+    u.waveColor.value.setRGB(baseC, baseC, baseC);
+    u.enableMouseInteraction.value = p.enableMouseInteraction ? 1 : 0;
+    u.mouseRadius.value = p.mouseRadius;
 
-    u.enableMouseInteraction.value = enableMouseInteraction ? 1 : 0;
-    u.mouseRadius.value = mouseRadius;
-
-    if (enableMouseInteraction) {
-      u.mousePos.value.copy(mouseRef.current);
+    if (p.enableMouseInteraction) {
+      // 从全局 mousemove ref 读取鼠标位置，转换为 canvas 像素坐标
+      const dpr = gl.getPixelRatio();
+      const rect = gl.domElement.getBoundingClientRect();
+      const mx = (ditherMouseRef.current.x - rect.left) * dpr;
+      const my = (ditherMouseRef.current.y - rect.top) * dpr;
+      u.mousePos.value.set(mx, my);
     }
   });
-
-  const handlePointerMove = e => {
-    if (!enableMouseInteraction) return;
-    const rect = gl.domElement.getBoundingClientRect();
-    const dpr = gl.getPixelRatio();
-    mouseRef.current.set((e.clientX - rect.left) * dpr, (e.clientY - rect.top) * dpr);
-  };
 
   return (
     <>
@@ -252,15 +262,6 @@ function DitheredWaves({
       <EffectComposer disableNormalPass>
         <RetroEffect colorNum={colorNum} pixelSize={pixelSize} />
       </EffectComposer>
-
-      <mesh
-        onPointerMove={handlePointerMove}
-        position={[0, 0, 0.01]}
-        scale={[viewport.width, viewport.height, 1]}
-      >
-        <planeGeometry args={[1, 1]} />
-        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
-      </mesh>
     </>
   );
 }
@@ -281,7 +282,8 @@ export default function Dither({
       className="w-full h-full relative"
       camera={{ position: [0, 0, 6] }}
       dpr={1}
-      gl={{ antialias: true, preserveDrawingBuffer: true }}
+      gl={{ antialias: true, preserveDrawingBuffer: true, alpha: true }}
+      onCreated={({ gl }) => gl.setClearColor(0, 0, 0, 0)}
     >
       <DitheredWaves
         waveSpeed={waveSpeed}
