@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 
 function clamp(value: number, min = 0, max = 1) {
   return Math.min(max, Math.max(min, value))
@@ -62,7 +62,7 @@ function ScrollExpandMedia({
   mediaType = 'image',
   mediaSrc,
   posterSrc,
-  bgImageSrc,
+  bgImageSrc: _bgImageSrc,
   title,
   scrollToExpand,
   children,

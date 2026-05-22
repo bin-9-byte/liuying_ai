@@ -66,7 +66,7 @@ const defaultImages = [
 
 export default function Section4({
   title = 'Browse my library',
-  archiveButton = { text: 'View gallery', href: '/work' },
+  archiveButton: _archiveButton = { text: 'View gallery', href: '/work' },
   images: customImages,
   className = '',
   maxHeight = 120,

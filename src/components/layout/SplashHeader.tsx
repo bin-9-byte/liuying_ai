@@ -18,11 +18,6 @@ interface SplashHeaderProps {
   theme?: 'dark' | 'light' | number
 }
 
-/** rgba helper: 在 #FFFFFF 和 #111111 之间插值 */
-function interpolateColor(t: number, dark: string, light: string) {
-  return t < 0.5 ? dark : light
-}
-
 /** 将 theme 归一化为 0-1 数值 */
 function themeToT(theme: 'dark' | 'light' | number | undefined): number {
   if (theme === undefined || theme === 'dark') return 0
@@ -31,7 +26,7 @@ function themeToT(theme: 'dark' | 'light' | number | undefined): number {
 }
 
 export default function SplashHeader({
-  paddingX = 240,
+  paddingX: _paddingX = 240,
   pointerEventsNone = true,
   right,
   showBackground = false,
@@ -49,6 +44,7 @@ export default function SplashHeader({
       ? '#08080f'
       : '#FFFFFF'
     : 'transparent'
+  void bgColor
 
   return (
     <div

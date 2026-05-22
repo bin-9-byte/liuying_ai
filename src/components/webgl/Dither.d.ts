@@ -11,5 +11,7 @@ declare module '@/components/webgl/Dither' {
     mouseRadius?: number
   }
   const Dither: (props: DitherProps) => JSX.Element
+  export const ditherScrollRef: { current: number }
+  export const ditherMouseRef: { current: { x: number; y: number } }
   export default Dither
 }

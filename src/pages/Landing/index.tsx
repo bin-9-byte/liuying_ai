@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { Check, Users, UserCheck, ArrowUpRight } from 'lucide-react'
+import { Check, ArrowUpRight } from 'lucide-react'
 // import TextType from '@/components/TextType' // 暂时注释掉打字机动效
 
 // ─── 占位模版图片 ───
