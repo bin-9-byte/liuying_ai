@@ -221,12 +221,13 @@ function DitheredWaves({
     const u = materialRef.current.uniforms;
     const p = propsRef.current;
 
-    if (!p.disableAnimation) {
-      u.time.value = clock.getElapsedTime();
-    }
-
     // 读取全局滚动进度，直接计算颜色和振幅，绕开 React props
     const sp = ditherScrollRef.current;
+
+    // sp >= 1 时马赛克点完全消失，冻结 time 避免流动效果仍在运行
+    if (!p.disableAnimation && sp < 1) {
+      u.time.value = clock.getElapsedTime();
+    }
     const baseC = 0.435 * (1 - sp);
     const baseAmp = 0.18 * (1 - sp);
 

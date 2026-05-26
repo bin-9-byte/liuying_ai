@@ -54,7 +54,7 @@ export default function SplashScreen() {
   const themeT = typeof headerTheme === 'number' ? headerTheme : headerTheme === 'light' ? 1 : 0
 
   return (
-    <div style={{ background: '#08080f' }}>
+    <div style={{ background: '#000000' }}>
       {/* 固定顶部 Header */}
       <SplashHeader
         showBackground={headerBg}
