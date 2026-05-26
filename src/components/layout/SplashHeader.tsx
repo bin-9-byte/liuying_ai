@@ -50,7 +50,7 @@ export default function SplashHeader({
     <div
       className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between header-layout"
       style={{
-        padding: '20px 300px',
+        padding: '20px clamp(24px, 15vw, 300px)',
         pointerEvents: pointerEventsNone ? 'none' : 'auto',
         background: 'transparent',
         transition: 'background 0.3s ease, color 0.3s ease',

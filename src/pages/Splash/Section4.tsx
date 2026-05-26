@@ -130,13 +130,13 @@ export default function Section4({
             }}
           >
             <p style={{ margin: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '29px', letterSpacing: '-0.018em', color: 'rgba(255,255,255,0.6)' }}>
-              设计决策，并非一座孤岛
+              海量运营素材，随取随用
             </p>
             <p style={{ margin: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '29px', letterSpacing: '-0.018em', color: 'rgba(255,255,255,0.6)' }}>
-              流影将色彩、版式、语言统一为完整的品牌体系
+              自动完成分层、命名与资产配置
             </p>
             <p style={{ margin: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '29px', letterSpacing: '-0.018em', color: 'rgba(255,255,255,0.6)' }}>
-              从第一稿，到第一百稿
+              告别手动整理图层
             </p>
           </div>
         </div>

@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 
 const posters = [
-  { src: '/section3/poster-1.png', label: 'Poster 01' },
-  { src: '/section3/poster-2.png', label: 'Poster 02' },
-  { src: '/section3/poster-3.png', label: 'Poster 03' },
-  { src: '/section3/poster-4.png', label: 'Poster 04' },
+  { src: '/section3/poster1.png', label: 'Poster 01' },
+  { src: '/section3/poster2.png', label: 'Poster 02' },
+  { src: '/section3/poster3.png', label: 'Poster 03' },
+  { src: '/section3/poster4.png', label: 'Poster 04' },
 ]
 
 function clamp(value: number, min = 0, max = 1) {
@@ -138,17 +138,19 @@ export default function Section3ScrollEffect() {
         >
           
           <h2 style={{ margin: 0, fontFamily: 'Manrope, sans-serif', fontWeight: 500, fontSize: 48, lineHeight: '56px', letterSpacing: '-0.01em', color: '#FFFFFF' }}>
-            以系统思维设计
+            从创意到完整视觉系统
           </h2>
-          <p style={{ margin: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '29px', letterSpacing: '-0.018em', color: 'rgba(255,255,255,0.6)' }}>
-            设计决策，并非一座孤岛
-          </p>
-          <p style={{ margin: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '29px', letterSpacing: '-0.018em', color: 'rgba(255,255,255,0.6)' }}>
-            流影将色彩、版式、语言统一为完整的品牌体系
-          </p>
-          <p style={{ margin: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '29px', letterSpacing: '-0.018em', color: 'rgba(255,255,255,0.6)' }}>
-            从第一稿，到第一百稿
-          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            <p style={{ margin: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '29px', letterSpacing: '-0.018em', color: 'rgba(255,255,255,0.6)' }}>
+              流影将色彩、版式与语言完整表达
+            </p>
+            <p style={{ margin: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '29px', letterSpacing: '-0.018em', color: 'rgba(255,255,255,0.6)' }}>
+              以系统思维设计
+            </p>
+            <p style={{ margin: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '29px', letterSpacing: '-0.018em', color: 'rgba(255,255,255,0.6)' }}>
+              让每个创意都能进入真实运营场景
+            </p>
+          </div>
         </div>
 
         {/* 舞台区 */}
@@ -228,7 +230,7 @@ export default function Section3ScrollEffect() {
                   {/* 文本行 */}
                   <div style={{ width: '100%' }}>
                     <span style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '24px', color: '#0E0E0E' }}>
-                      为湖南酱板鸭设计一个美食宣传商业海报，标题名称为："今天你要吃酱板鸭吗？！！"
+                      为精品咖啡品牌设计一组拿铁宣传海报，覆盖主视觉海报、线下展示、社媒内容和数字触点，要求高级克制，并保持统一的品牌调性。
                     </span>
                   </div>
 

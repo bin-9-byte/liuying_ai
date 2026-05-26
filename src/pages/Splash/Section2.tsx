@@ -19,7 +19,7 @@ export default function Section2() {
               margin: 0,
             }}
           >
-            你的AI设计智能体
+            你的生活服务运营智能体
           </p>
           <h2
             style={{
@@ -33,7 +33,7 @@ export default function Section2() {
               margin: 0,
             }}
           >
-            为新生代运动品牌<br />设计一个商品详情页
+            为生活服务门店<br />设计一套运营素材
           </h2>
         </div>
 
