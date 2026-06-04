@@ -261,8 +261,8 @@ function ScrollExpandMedia({
 export default function Section5v2() {
   return (
     <ScrollExpandMedia
-      mediaType="video"
-      mediaSrc="/test_video1.mp4"
+      mediaType="image"
+      mediaSrc="/test_img.png"
       bgImageSrc="https://images.unsplash.com/photo-1542621334-a254cf47733d?w=1920&h=1080&fit=crop&q=80"
       title="设计 不止于画布"
     />
