@@ -48,14 +48,19 @@ function useScrollProgress(targetRef: React.RefObject<HTMLElement | null>) {
   return progress
 }
 
+// 图片自然高宽比（长图）—— 运行时动态读取，先用默认值 3
+const IMG_ASPECT_RATIO = 3 // imgHeight / imgWidth，加载后更新
+
 interface ScrollExpandMediaProps {
-  mediaType?: 'video' | 'image'
+  mediaType?: 'video' | 'image' | 'longimage'
   mediaSrc: string
   posterSrc?: string
   bgImageSrc: string
   title?: string
   scrollToExpand?: string
   children?: ReactNode
+  /** 跳过展开阶段，直接从展开完成状态开始（用于与上一节过渡衔接） */
+  skipExpand?: boolean
 }
 
 function ScrollExpandMedia({
@@ -66,12 +71,32 @@ function ScrollExpandMedia({
   title,
   scrollToExpand,
   children,
+  skipExpand = false,
 }: ScrollExpandMediaProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const progress = useScrollProgress(sectionRef)
 
-  // progress 0→0.6 驱动动画，0.6→1 为停留段（内容已完全展示）
-  const animProgress = Math.min(1, progress / 0.75)
+  // 长图宽高比（动态）
+  const [imgAspect, setImgAspect] = useState(IMG_ASPECT_RATIO)
+  useEffect(() => {
+    if (mediaType !== 'longimage') return
+    const img = new Image()
+    img.onload = () => {
+      if (img.naturalWidth > 0) setImgAspect(img.naturalHeight / img.naturalWidth)
+    }
+    img.src = mediaSrc
+  }, [mediaSrc, mediaType])
+
+  // ── 阶段划分 ──
+  // 0 → 0.75 : 扩展动画
+  // 0.75 → 0.9 : 长图内部滚动
+  // 0.9 → 1   : 停留（长图到底，等待继续滚动离开）
+  const EXPAND_END = 0.75
+  const SCROLL_END = 0.90
+
+  // skipExpand 时跳过展开阶段：EXPAND_END 之前的行程直接映射到 animProgress=1
+  // 即展开已完成，行程全部用于长图滚动和停留
+  const animProgress = skipExpand ? 1 : Math.min(1, progress / EXPAND_END)
 
   // Media expands: 0 → 1 over animation range
   const expandProgress = smooth(0, 0.7, animProgress)
@@ -80,7 +105,7 @@ function ScrollExpandMedia({
   // Background fades out as media expands
   const bgOpacity = 1 - smooth(0, 0.5, animProgress)
 
-  // start: 30vw × 50vh → end: capped at 1210px wide, 16:9 ratio
+  // 容器尺寸
   const maxW = Math.min(window.innerWidth * 0.9, 1080)
   const startW = Math.min(window.innerWidth * 0.55, 640)
   const mediaWpx = startW + expandProgress * (maxW - startW)
@@ -88,6 +113,15 @@ function ScrollExpandMedia({
   const mediaW = `${mediaWpx}px`
   const mediaH = `${mediaHpx}px`
   const mediaRadius = 24
+
+  // 长图滚动偏移：progress 从 EXPAND_END 到 SCROLL_END 时，图片从顶到底
+  const imgDisplayW = mediaWpx * 0.8                    // 图片实际渲染宽度（与 CSS width:80% 对应）
+  const imgTotalH = imgDisplayW * imgAspect              // 图片自然高度（px）
+  const maxOffset = Math.max(0, imgTotalH - mediaHpx)    // 可滚动距离
+  const scrollT = skipExpand
+    ? clamp(progress / SCROLL_END)
+    : clamp((progress - EXPAND_END) / (SCROLL_END - EXPAND_END))
+  const imgOffsetY = -(scrollT * maxOffset)
 
   const firstWord = title ? title.split(' ')[0] : ''
   const restOfTitle = title ? title.split(' ').slice(1).join(' ') : ''
@@ -97,7 +131,7 @@ function ScrollExpandMedia({
     <section
       ref={sectionRef}
       id="section5v2"
-      style={{ position: 'relative', height: '400vh' }}
+      style={{ position: 'relative', height: '550vh' }}
       aria-label="Section 5v2 scroll animation"
     >
       {/* Sticky viewport */}
@@ -148,6 +182,9 @@ function ScrollExpandMedia({
               boxShadow: '0 0 24px rgba(0,0,0,0.15)',
               transition: 'none',
               zIndex: 0,
+              backgroundImage: 'url(/bg.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
             }}
           >
             {mediaType === 'video' ? (
@@ -159,6 +196,20 @@ function ScrollExpandMedia({
                 loop
                 playsInline
                 style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            ) : mediaType === 'longimage' ? (
+              <img
+                src={mediaSrc}
+                alt={title || 'media'}
+                style={{
+                  width: '80%',
+                  height: 'auto',
+                  display: 'block',
+                  margin: '0 auto',
+                  transform: `translateY(${imgOffsetY}px)`,
+                  willChange: 'transform',
+                  transition: 'none',
+                }}
               />
             ) : (
               <img
@@ -261,10 +312,11 @@ function ScrollExpandMedia({
 export default function Section5v2() {
   return (
     <ScrollExpandMedia
-      mediaType="image"
-      mediaSrc="/test_img.png"
+      mediaType="longimage"
+      mediaSrc="/longimg.png"
       bgImageSrc="https://images.unsplash.com/photo-1542621334-a254cf47733d?w=1920&h=1080&fit=crop&q=80"
       title="设计 不止于画布"
+      skipExpand
     />
   )
 }

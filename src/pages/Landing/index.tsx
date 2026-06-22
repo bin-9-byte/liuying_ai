@@ -38,23 +38,24 @@ interface SubCard {
   thumbnail: string   // 左侧主图
   overlayImage?: string  // 叠图样式第二张图
   cardStyle?: 'tilt3d' | 'stacked'  // 卡片样式
+  aspectRatio?: string  // 图片宽高比，如 "16:9"、"9:16"、"1:1"，默认 "1:1"
   prompt: string      // 模版提示词（选中后回填到输入框）
 }
 const TAG_SUB_TEMPLATES: Record<string, SubCard[]> = {
   '短视频模版': [
-    { title: '产品展示',   thumbnail: 'https://picsum.photos/seed/sv1/130/83', overlayImage: 'https://picsum.photos/seed/sv1b/130/83', cardStyle: 'stacked', prompt: '生成一个产品展示短视频，突出产品外观和核心功能' },
-    { title: '品牌宣传',   thumbnail: 'https://picsum.photos/seed/sv2/130/83', overlayImage: 'https://picsum.photos/seed/sv2b/130/83', cardStyle: 'stacked', prompt: '制作品牌宣传视频，展现品牌理念和视觉风格' },
-    { title: '教程模版',   thumbnail: 'https://picsum.photos/seed/sv3/130/83', overlayImage: 'https://picsum.photos/seed/sv3b/130/83', cardStyle: 'stacked', prompt: '创建操作教程视频，步骤清晰、画面简洁' },
-    { title: '节日主题',   thumbnail: 'https://picsum.photos/seed/sv4/130/83', overlayImage: 'https://picsum.photos/seed/sv4b/130/83', cardStyle: 'stacked', prompt: '设计节日主题短视频，充满节日氛围与创意' },
-    { title: '美食探店',   thumbnail: 'https://picsum.photos/seed/sv5/130/83', overlayImage: 'https://picsum.photos/seed/sv5b/130/83', cardStyle: 'stacked', prompt: '制作美食探店短视频，展现餐厅环境与菜品' },
-    { title: '旅行Vlog',  thumbnail: 'https://picsum.photos/seed/sv6/130/83', overlayImage: 'https://picsum.photos/seed/sv6b/130/83', cardStyle: 'stacked', prompt: '生成旅行Vlog，记录旅途风景与人文体验' },
+    { title: '产品展示',   thumbnail: 'https://picsum.photos/seed/sv1/130/83', overlayImage: 'https://picsum.photos/seed/sv1b/130/83', cardStyle: 'stacked', aspectRatio: '16:9', prompt: '生成一个产品展示短视频，突出产品外观和核心功能' },
+    { title: '品牌宣传',   thumbnail: 'https://picsum.photos/seed/sv2/130/83', overlayImage: 'https://picsum.photos/seed/sv2b/130/83', cardStyle: 'stacked', aspectRatio: '16:9', prompt: '制作品牌宣传视频，展现品牌理念和视觉风格' },
+    { title: '教程模版',   thumbnail: 'https://picsum.photos/seed/sv3/130/83', overlayImage: 'https://picsum.photos/seed/sv3b/130/83', cardStyle: 'stacked', aspectRatio: '16:9', prompt: '创建操作教程视频，步骤清晰、画面简洁' },
+    { title: '节日主题',   thumbnail: 'https://picsum.photos/seed/sv4/130/83', overlayImage: 'https://picsum.photos/seed/sv4b/130/83', cardStyle: 'stacked', aspectRatio: '16:9', prompt: '设计节日主题短视频，充满节日氛围与创意' },
+    { title: '美食探店',   thumbnail: 'https://picsum.photos/seed/sv5/130/83', overlayImage: 'https://picsum.photos/seed/sv5b/130/83', cardStyle: 'stacked', aspectRatio: '16:9', prompt: '制作美食探店短视频，展现餐厅环境与菜品' },
+    { title: '旅行Vlog',  thumbnail: 'https://picsum.photos/seed/sv6/130/83', overlayImage: 'https://picsum.photos/seed/sv6b/130/83', cardStyle: 'stacked', aspectRatio: '16:9', prompt: '生成旅行Vlog，记录旅途风景与人文体验' },
   ],
   '直播间模版': [
-    { title: '电商直播',   thumbnail: 'https://picsum.photos/seed/live1b/130/83', overlayImage: liveImg1, cardStyle: 'stacked', prompt: '搭建电商直播间背景，突出商品与促销信息' },
-    { title: '游戏直播',   thumbnail: 'https://picsum.photos/seed/live2b/130/83', overlayImage: liveImg2, cardStyle: 'stacked', prompt: '设计游戏直播间场景，沉浸感强、界面清晰' },
-    { title: '教学直播',   thumbnail: 'https://picsum.photos/seed/live3b/130/83', overlayImage: liveImg3, cardStyle: 'stacked', prompt: '创建教学直播间布局，板书区域与互动区分明' },
-    { title: '活动直播',   thumbnail: 'https://picsum.photos/seed/live4b/130/83', overlayImage: liveImg4, cardStyle: 'stacked', prompt: '搭建活动直播场景，舞台感强、品牌露出清晰' },
-    { title: '教育直播',   thumbnail: 'https://picsum.photos/seed/live5b/130/83', overlayImage: liveImg5, cardStyle: 'stacked', prompt: '制作教育直播间场景，专业感强、知识氛围浓厚' },
+    { title: '电商直播',   thumbnail: 'https://picsum.photos/seed/live1b/130/83', overlayImage: liveImg1, cardStyle: 'stacked', aspectRatio: '9:16', prompt: '搭建电商直播间背景，突出商品与促销信息' },
+    { title: '游戏直播',   thumbnail: 'https://picsum.photos/seed/live2b/130/83', overlayImage: liveImg2, cardStyle: 'stacked', aspectRatio: '9:16', prompt: '设计游戏直播间场景，沉浸感强、界面清晰' },
+    { title: '教学直播',   thumbnail: 'https://picsum.photos/seed/live3b/130/83', overlayImage: liveImg3, cardStyle: 'stacked', aspectRatio: '9:16', prompt: '创建教学直播间布局，板书区域与互动区分明' },
+    { title: '活动直播',   thumbnail: 'https://picsum.photos/seed/live4b/130/83', overlayImage: liveImg4, cardStyle: 'stacked', aspectRatio: '9:16', prompt: '搭建活动直播场景，舞台感强、品牌露出清晰' },
+    { title: '教育直播',   thumbnail: 'https://picsum.photos/seed/live5b/130/83', overlayImage: liveImg5, cardStyle: 'stacked', aspectRatio: '9:16', prompt: '制作教育直播间场景，专业感强、知识氛围浓厚' },
   ],
   '图片': [
     { title: '社交媒体',   thumbnail: 'https://picsum.photos/seed/img1/130/83', overlayImage: liveImg1, cardStyle: 'stacked', prompt: '生成社交媒体配图，风格年轻活泼、视觉冲击力强' },
@@ -111,9 +112,9 @@ function IconSend({ active }: { active?: boolean }) {
 
 // ─── 数据（使用本地 SVG 图标） ───
 const NAV_ITEMS = [
-  { label: '首页',  icon: iconHome,      iconActive: iconHomeActive },
-  { label: '素材库', icon: iconMaterials,  iconActive: iconMaterialsActive },
-  { label: '项目',  icon: iconProjects,   iconActive: iconProjectsActive },
+  { label: '首页',  icon: iconHome,      iconActive: iconHomeActive,      path: '/home' },
+  { label: '素材库', icon: iconMaterials,  iconActive: iconMaterialsActive, path: '/home/materials' },
+  { label: '项目',  icon: iconProjects,   iconActive: iconProjectsActive,  path: '/home/projects' },
 ]
 // QUICK_TAGS 已替换为各自的 TagButton 组件
 // const QUICK_TAGS = ['短视频模版', '直播间模版', '图片', '视频', '更多模板']
@@ -159,7 +160,7 @@ function Sidebar({
   onNavChange,
 }: {
   activeNav: number
-  onNavChange: (i: number) => void
+  onNavChange: (i: number, path: string) => void
 }) {
   const [showAvatarMenu, setShowAvatarMenu] = useState(false)
   const avatarRef = useRef<HTMLImageElement>(null)
@@ -236,7 +237,7 @@ function Sidebar({
             return (
               <motion.button
                 key={item.label}
-                onClick={() => onNavChange(i)}
+                onClick={() => onNavChange(i, item.path)}
                 whileTap={{ scale: 0.92 }}
                 transition={{ duration: 0.12 }}
                 style={{
@@ -253,7 +254,7 @@ function Sidebar({
                   padding: 0,
                 }}
               >
-                <div style={{ width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <div style={{ width: 20, height: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <img
                     src={isActive ? item.iconActive : item.icon}
                     alt={item.label}
@@ -556,6 +557,22 @@ function SubTemplateCard({
   )
 }
 
+// ─── 根据 aspectRatio 字符串（如 "16:9"）和基准尺寸，计算框/图片的 w/h ───
+// base 是长边基准（横图宽=base，竖图高=base，1:1 宽=base）
+function calcImgSize(aspectRatio?: string, base = 100): { w: number; h: number } {
+  if (!aspectRatio) return { w: base, h: base }
+  const parts = aspectRatio.split(':').map(Number)
+  if (parts.length !== 2 || !parts[0] || !parts[1]) return { w: base, h: base }
+  const [aw, ah] = parts
+  if (aw >= ah) {
+    // 横图或正方形：宽边 = base
+    return { w: base, h: Math.round(base * ah / aw) }
+  } else {
+    // 竖图：高边 = base
+    return { w: Math.round(base * aw / ah), h: base }
+  }
+}
+
 // ─── 叠图样式卡片 ───
 function StackedTemplateCard({
   card,
@@ -573,6 +590,10 @@ function StackedTemplateCard({
   onClick: () => void
 }) {
   const [hovered, setHovered] = React.useState(false)
+  const hasOverlay = !!card.overlayImage
+  // 框尺寸：长边 100px，图片填满框（objectFit cover）
+  const { w: frameW, h: frameH } = calcImgSize(card.aspectRatio, 100)
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
@@ -588,7 +609,7 @@ function StackedTemplateCard({
         borderRadius: 16,
         cursor: 'pointer',
         background: isSelected ? '#ECEDF0' : '#F7F7F8',
-        border: isSelected ? '0.5px solidrgb(122, 122, 122)' : '0.5px solid #E4E4E7',
+        border: isSelected ? '0.5px solid rgb(122, 122, 122)' : '0.5px solid #E4E4E7',
         display: 'flex',
         flexDirection: 'column',
         padding: 12,
@@ -596,51 +617,117 @@ function StackedTemplateCard({
         transition: 'background 0.2s, border-color 0.2s',
       }}
     >
-      {/* 图片叠放区 */}
+      {/* 图片区：白色展示区域 + 图片叠放 */}
       <div style={{
         flex: 1,
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        overflow: 'hidden',
       }}>
-        {/* 后图 */}
-        <motion.img
-          src={card.thumbnail}
-          alt={card.title}
-          animate={{
-            rotate: hovered ? -10 : -6,
-            scale: hovered ? 1.05 : 1,
-          }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          style={{
-            position: 'absolute',
-            width: 88,
-            height: 88,
-            objectFit: 'cover',
-            borderRadius: 10,
-            boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
-          }}
-        />
-        {/* 前图 */}
-        <motion.img
-          src={card.overlayImage || card.thumbnail}
-          alt={card.title}
-          animate={{
-            rotate: hovered ? 5 : 3,
-            scale: hovered ? 1.05 : 1,
-          }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          style={{
-            position: 'absolute',
-            width: 88,
-            height: 88,
-            objectFit: 'cover',
-            borderRadius: 10,
-            boxShadow: '0 4px 12px rgba(0,0,0,0.22)',
-          }}
-        />
+        {/* 白色展示底框，固定撑满图片区，嵌入效果 */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          borderRadius: 10,
+          background: '#FFFFFF',
+          border: '1px solid rgba(0,0,0,0.06)',
+        }} />
+        {hasOverlay ? (
+          <>
+            {/* 后图裁切框 */}
+            <motion.div
+              animate={hovered ? {
+                rotate: -14,
+                scale: 1,
+                opacity: 1,
+                y: 0,
+              } : {
+                rotate: 0,
+                scale: 0.85,
+                opacity: 0.7,
+                y: 4,
+              }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                marginTop: -(frameH / 2),
+                marginLeft: -(frameW / 2),
+                width: frameW,
+                height: frameH,
+                borderRadius: 10,
+                overflow: 'hidden',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+                zIndex: 1,
+              }}
+            >
+              <img
+                src={card.thumbnail}
+                alt={card.title}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </motion.div>
+            {/* 前图裁切框 */}
+            <motion.div
+              animate={hovered ? {
+                rotate: 12,
+                scale: 1,
+                y: 0,
+              } : {
+                rotate: 4,
+                scale: 1,
+                y: 0,
+              }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                marginTop: -(frameH / 2),
+                marginLeft: -(frameW / 2),
+                width: frameW,
+                height: frameH,
+                borderRadius: 10,
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.22)',
+                zIndex: 2,
+              }}
+            >
+              <img
+                src={card.overlayImage!}
+                alt={card.title}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </motion.div>
+          </>
+        ) : (
+          /* 单图裁切框：居中展示，hover 微放大 */
+          <motion.div
+            animate={{ scale: hovered ? 1.05 : 1 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              marginTop: -(frameH / 2),
+              marginLeft: -(frameW / 2),
+              width: frameW,
+              height: frameH,
+              borderRadius: 10,
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.18)',
+              zIndex: 1,
+            }}
+          >
+            <img
+              src={card.thumbnail}
+              alt={card.title}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          </motion.div>
+        )}
       </div>
       {/* 标题 */}
       <div style={{
@@ -845,6 +932,11 @@ export default function LandingPage() {
     if (prompt.trim()) navigate('/studio')
   }
 
+  const handleNavChange = (i: number, path: string) => {
+    setActiveNav(i)
+    if (path !== '/home') navigate(path)
+  }
+
   return (
     <div
       style={{
@@ -857,7 +949,7 @@ export default function LandingPage() {
       }}
     >
       {/* 左侧导航 */}
-      <Sidebar activeNav={activeNav} onNavChange={setActiveNav} />
+      <Sidebar activeNav={activeNav} onNavChange={handleNavChange} />
 
       {/* 主内容区 */}
       <main

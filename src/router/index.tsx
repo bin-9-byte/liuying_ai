@@ -7,6 +7,8 @@ import PageLoader from '@/components/common/PageLoader'
 const SplashPage = lazy(() => import('@/pages/Splash'))
 const LandingPage = lazy(() => import('@/pages/Landing'))
 const StudioPage = lazy(() => import('@/pages/Studio'))
+const ProjectsPage = lazy(() => import('@/pages/Projects'))
+const CanvasPage = lazy(() => import('@/pages/Canvas'))
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +41,22 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<PageLoader />}>
             <StudioPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'projects',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <ProjectsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'canvas/:id?',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <CanvasPage />
           </Suspense>
         ),
       },

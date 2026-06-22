@@ -8,9 +8,11 @@ export default function AppLayout() {
   const { pathname } = useLocation()
   const isStudio = pathname.startsWith('/home/studio')
   const isHome = pathname === '/home'
+  const isProjects = pathname.startsWith('/home/projects')
+  const isCanvas = pathname.startsWith('/home/canvas')
 
-  // 首页有自己的浅色布局，不使用全局深色背景和顶部 Navbar
-  if (isHome) {
+  // 首页、项目页、画布页有自己的布局，不使用全局深色背景和顶部 Navbar
+  if (isHome || isProjects || isCanvas) {
     return <Outlet />
   }
 

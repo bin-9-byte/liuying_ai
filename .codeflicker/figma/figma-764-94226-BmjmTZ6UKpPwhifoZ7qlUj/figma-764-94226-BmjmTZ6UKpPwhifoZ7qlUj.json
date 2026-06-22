@@ -1,0 +1,1235 @@
+{
+  "id": "764:94226",
+  "nodeType": "view",
+  "styles": {
+    "boxSizing": "border-box",
+    "overflow": "hidden",
+    "height": "960px",
+    "width": "1440px",
+    "background": "#FFFFFF",
+    "position": "relative"
+  },
+  "zIndex": 1,
+  "children": [
+    {
+      "id": "764:94227",
+      "nodeType": "view",
+      "styles": {
+        "boxSizing": "border-box",
+        "width": "1364px",
+        "height": "960px",
+        "position": "absolute",
+        "top": "0px",
+        "right": "0px",
+        "borderRadius": "24px",
+        "background": "#FFFFFF",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "normal",
+        "padding": "24px 32px 0px",
+        "gap": "16px"
+      },
+      "zIndex": 1,
+      "children": [
+        {
+          "id": "764:94228",
+          "nodeType": "view",
+          "styles": {
+            "boxSizing": "border-box",
+            "flexBasis": "39px",
+            "width": "1300px",
+            "height": "39px",
+            "alignSelf": "stretch",
+            "display": "flex",
+            "justifyContent": "normal",
+            "alignItems": "center",
+            "padding": "0px",
+            "gap": "24px"
+          },
+          "zIndex": 1,
+          "children": [
+            {
+              "id": "764:94229",
+              "nodeType": "text",
+              "styles": {
+                "boxSizing": "border-box",
+                "minWidth": "112px",
+                "textAlign": "center",
+                "verticalAlign": "top",
+                "fontSize": "28px",
+                "lineHeight": "normal",
+                "fontFamily": "PingFang SC",
+                "fontWeight": "500",
+                "color": "#0E0E0E"
+              },
+              "zIndex": 1,
+              "characters": "我的项目"
+            }
+          ]
+        },
+        {
+          "id": "764:94230",
+          "nodeType": "view",
+          "styles": {
+            "boxSizing": "border-box",
+            "flexBasis": "46px",
+            "width": "1300px",
+            "height": "46px",
+            "alignSelf": "stretch",
+            "display": "flex",
+            "justifyContent": "space-between",
+            "alignItems": "center",
+            "padding": "0px"
+          },
+          "zIndex": 2,
+          "children": [
+            {
+              "id": "764:94231",
+              "nodeType": "view",
+              "styles": {
+                "boxSizing": "border-box",
+                "flexBasis": "264px",
+                "width": "264px",
+                "height": "46px",
+                "display": "flex",
+                "justifyContent": "normal",
+                "alignItems": "center",
+                "padding": "7px 3px",
+                "gap": "24px"
+              },
+              "zIndex": 1,
+              "children": [
+                {
+                  "id": "I764:94231;246:21124",
+                  "nodeType": "view",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexBasis": "64px",
+                    "width": "64px",
+                    "height": "30px",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "normal",
+                    "alignItems": "center",
+                    "padding": "0px",
+                    "gap": "4px"
+                  },
+                  "zIndex": 1,
+                  "children": [
+                    {
+                      "id": "I764:94231;246:21124;7171:201442",
+                      "nodeType": "text",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "minWidth": "64px",
+                        "verticalAlign": "top",
+                        "fontSize": "16px",
+                        "lineHeight": "24px",
+                        "fontFamily": "Outfit",
+                        "fontWeight": "500",
+                        "color": "#0E0E0E"
+                      },
+                      "zIndex": 1,
+                      "characters": "流影项目"
+                    },
+                    {
+                      "id": "I764:94231;246:21124;7171:201443",
+                      "nodeType": "view",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "flexBasis": "2px",
+                        "width": "12px",
+                        "height": "2px",
+                        "borderRadius": "4px",
+                        "background": "#0E0E0E"
+                      },
+                      "zIndex": 2
+                    }
+                  ],
+                  "componentId": "1:679",
+                  "componentProperties": [
+                    {
+                      "name": "选中",
+                      "value": "on",
+                      "type": "VARIANT"
+                    }
+                  ]
+                },
+                {
+                  "id": "I764:94231;246:21125",
+                  "nodeType": "view",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexBasis": "64px",
+                    "width": "64px",
+                    "height": "30px",
+                    "alignSelf": "stretch",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "normal",
+                    "alignItems": "center",
+                    "padding": "0px",
+                    "gap": "2px"
+                  },
+                  "zIndex": 2,
+                  "children": [
+                    {
+                      "id": "I764:94231;246:21125;7228:233863",
+                      "nodeType": "text",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "minWidth": "64px",
+                        "verticalAlign": "top",
+                        "fontSize": "16px",
+                        "lineHeight": "24px",
+                        "fontFamily": "Outfit",
+                        "fontWeight": "400",
+                        "color": "#878787"
+                      },
+                      "zIndex": 1,
+                      "characters": "我的上传"
+                    }
+                  ],
+                  "componentId": "1:682",
+                  "componentProperties": [
+                    {
+                      "name": "选中",
+                      "value": "off",
+                      "type": "VARIANT"
+                    }
+                  ]
+                },
+                {
+                  "id": "I764:94231;246:21126",
+                  "nodeType": "view",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexBasis": "80px",
+                    "width": "80px",
+                    "height": "30px",
+                    "alignSelf": "stretch",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "normal",
+                    "alignItems": "center",
+                    "padding": "0px",
+                    "gap": "2px"
+                  },
+                  "zIndex": 3,
+                  "children": [
+                    {
+                      "id": "I764:94231;246:21126;7228:233863",
+                      "nodeType": "text",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "minWidth": "80px",
+                        "verticalAlign": "top",
+                        "fontSize": "16px",
+                        "lineHeight": "24px",
+                        "fontFamily": "Outfit",
+                        "fontWeight": "400",
+                        "color": "#878787"
+                      },
+                      "zIndex": 1,
+                      "characters": "工作流生成"
+                    }
+                  ],
+                  "componentId": "1:682",
+                  "componentProperties": [
+                    {
+                      "name": "选中",
+                      "value": "off",
+                      "type": "VARIANT"
+                    }
+                  ]
+                }
+              ],
+              "componentId": "246:21133",
+              "componentProperties": [
+                {
+                  "name": "Property 1",
+                  "value": "Frame 2147239706",
+                  "type": "VARIANT"
+                }
+              ]
+            },
+            {
+              "id": "764:94232",
+              "nodeType": "view",
+              "styles": {
+                "boxSizing": "border-box",
+                "overflow": "hidden",
+                "flexBasis": "230px",
+                "width": "230px",
+                "height": "46px",
+                "borderWidth": "1px",
+                "borderStyle": "solid",
+                "borderColor": "#ECEDF0",
+                "borderRadius": "12px",
+                "display": "flex",
+                "justifyContent": "normal",
+                "alignItems": "center",
+                "padding": "11px 4px 11px 11px",
+                "gap": "4px"
+              },
+              "zIndex": 2,
+              "children": [
+                {
+                  "id": "I764:94232;1467:38976",
+                  "nodeType": "image",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexBasis": "16px",
+                    "width": "16px",
+                    "height": "16px"
+                  },
+                  "zIndex": 1,
+                  "componentId": "1:732",
+                  "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/70097d06-880f-4092-ab12-b312fc662956"
+                },
+                {
+                  "id": "I764:94232;1467:38977",
+                  "nodeType": "view",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                    "width": "193px",
+                    "height": "22px",
+                    "alignSelf": "stretch",
+                    "borderRadius": "4px 0px 0px 4px",
+                    "display": "flex",
+                    "justifyContent": "normal",
+                    "alignItems": "center",
+                    "padding": "0px",
+                    "gap": "8px"
+                  },
+                  "zIndex": 2,
+                  "children": [
+                    {
+                      "id": "I764:94232;1467:38978",
+                      "nodeType": "text",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "flexShrink": 1,
+                        "minWidth": "193px",
+                        "width": "193px",
+                        "alignItems": "center",
+                        "verticalAlign": "middle",
+                        "fontSize": "14px",
+                        "lineHeight": "20px",
+                        "fontFamily": "Outfit",
+                        "fontWeight": "400",
+                        "color": "#878787"
+                      },
+                      "zIndex": 1,
+                      "characters": "搜索"
+                    }
+                  ]
+                }
+              ],
+              "componentId": "1:818",
+              "componentProperties": [
+                {
+                  "name": "hover",
+                  "value": "off",
+                  "type": "VARIANT"
+                },
+                {
+                  "name": "输入",
+                  "value": "off",
+                  "type": "VARIANT"
+                },
+                {
+                  "name": "默认",
+                  "value": "on",
+                  "type": "VARIANT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "764:94233",
+          "nodeType": "view",
+          "styles": {
+            "boxSizing": "border-box",
+            "flexBasis": "240px",
+            "width": "1300px",
+            "height": "240px",
+            "alignSelf": "stretch",
+            "display": "flex",
+            "flexWrap": "wrap",
+            "justifyContent": "normal",
+            "padding": "0px",
+            "gap": "16px"
+          },
+          "zIndex": 3,
+          "children": [
+            {
+              "id": "764:94234",
+              "nodeType": "view",
+              "styles": {
+                "boxSizing": "border-box",
+                "flexGrow": 1,
+                "flexShrink": 1,
+                "width": "313px",
+                "height": "240px",
+                "borderWidth": "1px",
+                "borderStyle": "solid",
+                "borderColor": "#ECEDF0",
+                "borderRadius": "12px",
+                "background": "#FFFFFF",
+                "display": "flex",
+                "flexDirection": "column",
+                "justifyContent": "normal",
+                "padding": "15px",
+                "gap": "16px"
+              },
+              "zIndex": 1,
+              "children": [
+                {
+                  "id": "764:94235",
+                  "nodeType": "image",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                    "width": "282px",
+                    "height": "157px",
+                    "alignSelf": "stretch",
+                    "outlineWidth": "1px",
+                    "outlineStyle": "solid",
+                    "outlineColor": "#ECEDF0",
+                    "borderRadius": "8px",
+                    "background": "#F5F5F7",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "center",
+                    "alignItems": "center",
+                    "gap": "10px"
+                  },
+                  "zIndex": 1,
+                  "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/9ba20b8d-846b-405f-9624-2fa119433cb0"
+                },
+                {
+                  "id": "764:94237",
+                  "nodeType": "view",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexBasis": "36px",
+                    "width": "70px",
+                    "height": "36px",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "center",
+                    "alignItems": "center",
+                    "padding": "0px 4px",
+                    "gap": "8px"
+                  },
+                  "zIndex": 2,
+                  "children": [
+                    {
+                      "id": "764:94238",
+                      "nodeType": "text",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "opacity": "0.8",
+                        "minWidth": "62px",
+                        "alignSelf": "stretch",
+                        "width": "62px",
+                        "verticalAlign": "top",
+                        "fontSize": "14px",
+                        "lineHeight": "14px",
+                        "fontFamily": "PingFang SC",
+                        "fontWeight": "500",
+                        "color": "#0E0E0E"
+                      },
+                      "zIndex": 1,
+                      "characters": "新建项目"
+                    },
+                    {
+                      "id": "764:94239",
+                      "nodeType": "text",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "opacity": "0.5",
+                        "minWidth": "62px",
+                        "alignSelf": "stretch",
+                        "width": "62px",
+                        "verticalAlign": "top",
+                        "fontSize": "12px",
+                        "lineHeight": "14px",
+                        "fontFamily": "PingFang SC",
+                        "fontWeight": "400",
+                        "color": "#0E0E0E00"
+                      },
+                      "zIndex": 2,
+                      "characters": "2026.01.23"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "764:94240",
+              "nodeType": "view",
+              "styles": {
+                "boxSizing": "border-box",
+                "flexGrow": 1,
+                "flexShrink": 1,
+                "width": "313px",
+                "height": "240px",
+                "borderWidth": "1px",
+                "borderStyle": "solid",
+                "borderColor": "#ECEDF0",
+                "borderRadius": "12px",
+                "display": "flex",
+                "flexDirection": "column",
+                "justifyContent": "normal",
+                "padding": "15px",
+                "gap": "16px"
+              },
+              "zIndex": 2,
+              "children": [
+                {
+                  "id": "I764:94240;11:3016",
+                  "nodeType": "image",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                    "width": "283px",
+                    "height": "157px",
+                    "alignSelf": "stretch",
+                    "outlineWidth": "1px",
+                    "outlineStyle": "solid",
+                    "outlineColor": "#ECEDF0",
+                    "borderRadius": "8px",
+                    "background": "#ECEDF033",
+                    "display": "flex",
+                    "justifyContent": "normal",
+                    "alignItems": "center",
+                    "gap": "10px"
+                  },
+                  "zIndex": 1,
+                  "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/c800d143-f464-4051-b4c1-060d2a60f429"
+                },
+                {
+                  "id": "I764:94240;11:3017",
+                  "nodeType": "view",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexBasis": "36px",
+                    "width": "115px",
+                    "height": "36px",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "center",
+                    "alignItems": "center",
+                    "padding": "0px 4px",
+                    "gap": "8px"
+                  },
+                  "zIndex": 2,
+                  "children": [
+                    {
+                      "id": "I764:94240;11:3018",
+                      "nodeType": "text",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "opacity": "0.8",
+                        "minWidth": "107px",
+                        "alignSelf": "stretch",
+                        "width": "107px",
+                        "verticalAlign": "top",
+                        "fontSize": "14px",
+                        "lineHeight": "14px",
+                        "fontFamily": "PingFang SC",
+                        "fontWeight": "500",
+                        "color": "#0E0E0E"
+                      },
+                      "zIndex": 1,
+                      "characters": "图文模版-打字报"
+                    },
+                    {
+                      "id": "I764:94240;11:3019",
+                      "nodeType": "text",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "opacity": "0.5",
+                        "minWidth": "107px",
+                        "alignSelf": "stretch",
+                        "width": "107px",
+                        "verticalAlign": "top",
+                        "fontSize": "12px",
+                        "lineHeight": "14px",
+                        "fontFamily": "PingFang SC",
+                        "fontWeight": "400",
+                        "color": "#0E0E0E"
+                      },
+                      "zIndex": 2,
+                      "characters": "2026.01.23"
+                    }
+                  ]
+                }
+              ],
+              "componentId": "11:3042"
+            },
+            {
+              "id": "764:94241",
+              "nodeType": "view",
+              "styles": {
+                "boxSizing": "border-box",
+                "flexGrow": 1,
+                "flexShrink": 1,
+                "width": "313px",
+                "height": "240px",
+                "borderWidth": "1px",
+                "borderStyle": "solid",
+                "borderColor": "#ECEDF0",
+                "borderRadius": "12px",
+                "display": "flex",
+                "flexDirection": "column",
+                "justifyContent": "normal",
+                "padding": "15px",
+                "gap": "16px"
+              },
+              "zIndex": 3,
+              "children": [
+                {
+                  "id": "I764:94241;11:3016",
+                  "nodeType": "image",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                    "width": "282px",
+                    "height": "157px",
+                    "alignSelf": "stretch",
+                    "outlineWidth": "1px",
+                    "outlineStyle": "solid",
+                    "outlineColor": "#ECEDF0",
+                    "borderRadius": "8px",
+                    "background": "#ECEDF033",
+                    "display": "flex",
+                    "justifyContent": "normal",
+                    "alignItems": "center",
+                    "gap": "10px"
+                  },
+                  "zIndex": 1,
+                  "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/f18f451f-6864-409a-a2d4-3540f7913d11"
+                },
+                {
+                  "id": "I764:94241;11:3017",
+                  "nodeType": "view",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexBasis": "36px",
+                    "width": "115px",
+                    "height": "36px",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "center",
+                    "alignItems": "center",
+                    "padding": "0px 4px",
+                    "gap": "8px"
+                  },
+                  "zIndex": 2,
+                  "children": [
+                    {
+                      "id": "I764:94241;11:3018",
+                      "nodeType": "text",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "opacity": "0.8",
+                        "minWidth": "107px",
+                        "alignSelf": "stretch",
+                        "width": "107px",
+                        "verticalAlign": "top",
+                        "fontSize": "14px",
+                        "lineHeight": "14px",
+                        "fontFamily": "PingFang SC",
+                        "fontWeight": "500",
+                        "color": "#0E0E0E"
+                      },
+                      "zIndex": 1,
+                      "characters": "图文模版-电影票"
+                    },
+                    {
+                      "id": "I764:94241;11:3019",
+                      "nodeType": "text",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "opacity": "0.5",
+                        "minWidth": "107px",
+                        "alignSelf": "stretch",
+                        "width": "107px",
+                        "verticalAlign": "top",
+                        "fontSize": "12px",
+                        "lineHeight": "14px",
+                        "fontFamily": "PingFang SC",
+                        "fontWeight": "400",
+                        "color": "#0E0E0E"
+                      },
+                      "zIndex": 2,
+                      "characters": "2026.01.23"
+                    }
+                  ]
+                }
+              ],
+              "componentId": "11:3042"
+            },
+            {
+              "id": "764:94242",
+              "nodeType": "view",
+              "styles": {
+                "boxSizing": "border-box",
+                "flexGrow": 1,
+                "flexShrink": 1,
+                "width": "313px",
+                "height": "240px",
+                "borderWidth": "1px",
+                "borderStyle": "solid",
+                "borderColor": "#ECEDF0",
+                "borderRadius": "12px",
+                "display": "flex",
+                "flexDirection": "column",
+                "justifyContent": "normal",
+                "padding": "15px",
+                "gap": "16px"
+              },
+              "zIndex": 4,
+              "children": [
+                {
+                  "id": "I764:94242;11:3016",
+                  "nodeType": "image",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                    "width": "282px",
+                    "height": "157px",
+                    "alignSelf": "stretch",
+                    "outlineWidth": "1px",
+                    "outlineStyle": "solid",
+                    "outlineColor": "#ECEDF0",
+                    "borderRadius": "8px",
+                    "background": "#ECEDF033",
+                    "display": "flex",
+                    "justifyContent": "normal",
+                    "alignItems": "center",
+                    "gap": "10px"
+                  },
+                  "zIndex": 1,
+                  "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/629d41bb-9a8b-476d-b76b-8247de2fef30"
+                },
+                {
+                  "id": "I764:94242;11:3017",
+                  "nodeType": "view",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexBasis": "36px",
+                    "width": "73px",
+                    "height": "36px",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "center",
+                    "alignItems": "center",
+                    "padding": "0px 4px",
+                    "gap": "8px"
+                  },
+                  "zIndex": 2,
+                  "children": [
+                    {
+                      "id": "I764:94242;11:3018",
+                      "nodeType": "text",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "opacity": "0.8",
+                        "minWidth": "65px",
+                        "alignSelf": "stretch",
+                        "width": "65px",
+                        "verticalAlign": "top",
+                        "fontSize": "14px",
+                        "lineHeight": "14px",
+                        "fontFamily": "PingFang SC",
+                        "fontWeight": "500",
+                        "color": "#0E0E0E"
+                      },
+                      "zIndex": 1,
+                      "characters": "贴纸-火锅"
+                    },
+                    {
+                      "id": "I764:94242;11:3019",
+                      "nodeType": "text",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "opacity": "0.5",
+                        "minWidth": "65px",
+                        "alignSelf": "stretch",
+                        "width": "65px",
+                        "verticalAlign": "top",
+                        "fontSize": "12px",
+                        "lineHeight": "14px",
+                        "fontFamily": "PingFang SC",
+                        "fontWeight": "400",
+                        "color": "#0E0E0E"
+                      },
+                      "zIndex": 2,
+                      "characters": "2026.01.23"
+                    }
+                  ]
+                }
+              ],
+              "componentId": "11:3042"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6383:30011",
+      "nodeType": "view",
+      "styles": {
+        "boxSizing": "border-box",
+        "width": "1440px",
+        "position": "absolute",
+        "top": "0px",
+        "left": "0px",
+        "height": "82px",
+        "display": "flex",
+        "justifyContent": "normal",
+        "alignItems": "center",
+        "padding": "23px 27px 23px 23px"
+      },
+      "zIndex": 2,
+      "children": [
+        {
+          "id": "6383:30012",
+          "nodeType": "view",
+          "styles": {
+            "boxSizing": "border-box",
+            "flexBasis": "36px",
+            "width": "36px",
+            "height": "34px",
+            "position": "relative"
+          },
+          "zIndex": 1,
+          "children": [
+            {
+              "id": "6383:30013",
+              "nodeType": "image",
+              "styles": {
+                "boxSizing": "border-box",
+                "position": "absolute",
+                "bottom": "10.185565948486328px",
+                "left": "0px",
+                "width": "9px",
+                "height": "4px"
+              },
+              "zIndex": 1,
+              "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/f28c4a40-c5a3-499e-97aa-eaab5eecd72d"
+            },
+            {
+              "id": "6383:30014",
+              "nodeType": "image",
+              "styles": {
+                "boxSizing": "border-box",
+                "position": "absolute",
+                "bottom": "0.000019073486328125px",
+                "right": "5.263172149658203px",
+                "width": "15px",
+                "height": "11px"
+              },
+              "zIndex": 2,
+              "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/bc8462b4-daed-4ec0-8418-31b500c590cc"
+            },
+            {
+              "id": "6383:30015",
+              "nodeType": "image",
+              "styles": {
+                "boxSizing": "border-box",
+                "position": "absolute",
+                "bottom": "2.214862823486328px",
+                "left": "1.1015625px",
+                "width": "29px",
+                "height": "30px"
+              },
+              "zIndex": 3,
+              "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/e2690bc5-847e-4099-ba60-beb51d5362ba"
+            },
+            {
+              "id": "6383:30018",
+              "nodeType": "image",
+              "styles": {
+                "boxSizing": "border-box",
+                "position": "absolute",
+                "top": "0px",
+                "right": "-0.000499725341796875px",
+                "width": "24px",
+                "height": "23px"
+              },
+              "zIndex": 4,
+              "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/9c63f898-5325-464c-adb4-f1115d606633"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "764:94244",
+      "nodeType": "view",
+      "styles": {
+        "boxSizing": "border-box",
+        "position": "absolute",
+        "bottom": "0px",
+        "left": "0px",
+        "width": "88px",
+        "height": "592px",
+        "display": "flex",
+        "justifyContent": "normal",
+        "alignItems": "center",
+        "padding": "16px",
+        "gap": "10px"
+      },
+      "zIndex": 3,
+      "children": [
+        {
+          "id": "764:94245",
+          "nodeType": "view",
+          "styles": {
+            "boxSizing": "border-box",
+            "flexBasis": "56px",
+            "width": "56px",
+            "height": "560px",
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "space-between",
+            "padding": "0px"
+          },
+          "zIndex": 1,
+          "children": [
+            {
+              "id": "764:94246",
+              "nodeType": "view",
+              "styles": {
+                "boxSizing": "border-box",
+                "flexBasis": "192px",
+                "width": "56px",
+                "height": "192px",
+                "alignSelf": "stretch",
+                "display": "flex",
+                "flexDirection": "column",
+                "justifyContent": "normal",
+                "padding": "0px",
+                "gap": "12px"
+              },
+              "zIndex": 1,
+              "children": [
+                {
+                  "id": "764:94247",
+                  "nodeType": "view",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexBasis": "56px",
+                    "width": "56px",
+                    "height": "56px",
+                    "alignSelf": "stretch",
+                    "borderRadius": "12px",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "center",
+                    "alignItems": "center",
+                    "padding": "0px",
+                    "gap": "6px"
+                  },
+                  "zIndex": 1,
+                  "children": [
+                    {
+                      "id": "764:94248",
+                      "nodeType": "view",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "flexBasis": "47px",
+                        "width": "31px",
+                        "height": "47px",
+                        "display": "flex",
+                        "flexDirection": "column",
+                        "justifyContent": "center",
+                        "alignItems": "center",
+                        "padding": "0px",
+                        "gap": "3px"
+                      },
+                      "zIndex": 1,
+                      "children": [
+                        {
+                          "id": "764:94249",
+                          "nodeType": "view",
+                          "styles": {
+                            "boxSizing": "border-box",
+                            "overflow": "hidden",
+                            "flexBasis": "24px",
+                            "width": "24px",
+                            "height": "24px",
+                            "position": "relative",
+                            "display": "flex",
+                            "flexDirection": "column",
+                            "paddingTop": "1.79248046875px",
+                            "alignItems": "center"
+                          },
+                          "zIndex": 1,
+                          "children": [
+                            {
+                              "id": "container_I764:94249;223:5163_I764:94249;223:5164",
+                              "nodeType": "view",
+                              "styles": {
+                                "boxSizing": "border-box",
+                                "position": "relative",
+                                "width": "21px",
+                                "height": "20px",
+                                "background": "url(https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/2dc3fb5a-64ff-48e2-b49b-53e095b457fb) center / cover no-repeat",
+                                "display": "flex",
+                                "flexDirection": "column",
+                                "paddingTop": "9.318603515625px",
+                                "paddingLeft": "8.541015625px",
+                                "alignItems": "flex-start"
+                              },
+                              "children": [
+                                {
+                                  "id": "I764:94249;223:5164",
+                                  "nodeType": "image",
+                                  "styles": {
+                                    "boxSizing": "border-box",
+                                    "width": "7px",
+                                    "height": "6px"
+                                  },
+                                  "zIndex": 4,
+                                  "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/780c9e86-b42c-497d-9e6d-3a8b96e22285"
+                                }
+                              ],
+                              "zIndex": 4
+                            }
+                          ],
+                          "componentId": "223:5165"
+                        },
+                        {
+                          "id": "764:94250",
+                          "nodeType": "text",
+                          "styles": {
+                            "boxSizing": "border-box",
+                            "minWidth": "28px",
+                            "verticalAlign": "top",
+                            "fontSize": "14px",
+                            "lineHeight": "20px",
+                            "fontFamily": "Outfit",
+                            "fontWeight": "400",
+                            "color": "#0E0E0E"
+                          },
+                          "zIndex": 2,
+                          "characters": "首页"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "764:94251",
+                  "nodeType": "view",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexBasis": "56px",
+                    "width": "56px",
+                    "height": "56px",
+                    "alignSelf": "stretch",
+                    "borderRadius": "12px",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "center",
+                    "alignItems": "center",
+                    "padding": "0px",
+                    "gap": "6px"
+                  },
+                  "zIndex": 2,
+                  "children": [
+                    {
+                      "id": "764:94252",
+                      "nodeType": "view",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "flexBasis": "47px",
+                        "width": "31px",
+                        "height": "47px",
+                        "display": "flex",
+                        "flexDirection": "column",
+                        "justifyContent": "center",
+                        "alignItems": "center",
+                        "padding": "0px",
+                        "gap": "3px"
+                      },
+                      "zIndex": 1,
+                      "children": [
+                        {
+                          "id": "764:94253",
+                          "nodeType": "view",
+                          "styles": {
+                            "boxSizing": "border-box",
+                            "overflow": "hidden",
+                            "flexBasis": "24px",
+                            "width": "24px",
+                            "height": "24px",
+                            "position": "relative",
+                            "display": "flex",
+                            "flexDirection": "column",
+                            "justifyContent": "center",
+                            "alignItems": "center"
+                          },
+                          "zIndex": 1,
+                          "children": [
+                            {
+                              "id": "I764:94253;223:5301",
+                              "nodeType": "image",
+                              "styles": {
+                                "boxSizing": "border-box",
+                                "width": "20px",
+                                "height": "20px"
+                              },
+                              "zIndex": 3,
+                              "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/924c536d-5dcf-45df-953a-2c396cc73453"
+                            }
+                          ],
+                          "componentId": "223:5320"
+                        },
+                        {
+                          "id": "764:94255",
+                          "nodeType": "text",
+                          "styles": {
+                            "boxSizing": "border-box",
+                            "minWidth": "42px",
+                            "verticalAlign": "top",
+                            "fontSize": "14px",
+                            "lineHeight": "20px",
+                            "fontFamily": "Outfit",
+                            "fontWeight": "400",
+                            "color": "#0E0E0E"
+                          },
+                          "zIndex": 3,
+                          "characters": "素材库"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "764:94256",
+                  "nodeType": "view",
+                  "styles": {
+                    "boxSizing": "border-box",
+                    "flexBasis": "56px",
+                    "width": "56px",
+                    "height": "56px",
+                    "alignSelf": "stretch",
+                    "borderRadius": "12px",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "center",
+                    "alignItems": "center",
+                    "padding": "0px",
+                    "gap": "6px"
+                  },
+                  "zIndex": 3,
+                  "children": [
+                    {
+                      "id": "764:94257",
+                      "nodeType": "view",
+                      "styles": {
+                        "boxSizing": "border-box",
+                        "flexBasis": "47px",
+                        "width": "31px",
+                        "height": "47px",
+                        "display": "flex",
+                        "flexDirection": "column",
+                        "justifyContent": "center",
+                        "alignItems": "center",
+                        "padding": "0px",
+                        "gap": "3px"
+                      },
+                      "zIndex": 1,
+                      "children": [
+                        {
+                          "id": "735:20822",
+                          "nodeType": "view",
+                          "styles": {
+                            "boxSizing": "border-box",
+                            "overflow": "hidden",
+                            "flexBasis": "24px",
+                            "width": "24px",
+                            "height": "24px",
+                            "position": "relative",
+                            "display": "flex",
+                            "flexDirection": "column",
+                            "paddingTop": "2.4443359375px",
+                            "alignItems": "center"
+                          },
+                          "zIndex": 1,
+                          "children": [
+                            {
+                              "id": "735:20804",
+                              "nodeType": "image",
+                              "styles": {
+                                "boxSizing": "border-box",
+                                "width": "21px",
+                                "height": "19px"
+                              },
+                              "zIndex": 3,
+                              "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/1bb1d676-aa11-430b-91d9-9291b3888a31"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "764:94258",
+                          "nodeType": "text",
+                          "styles": {
+                            "boxSizing": "border-box",
+                            "minWidth": "28px",
+                            "verticalAlign": "top",
+                            "fontSize": "14px",
+                            "lineHeight": "20px",
+                            "fontFamily": "Outfit",
+                            "fontWeight": "400",
+                            "color": "#0E0E0E"
+                          },
+                          "zIndex": 2,
+                          "characters": "项目"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "764:94259",
+              "nodeType": "image",
+              "styles": {
+                "boxSizing": "border-box",
+                "flexBasis": "56px",
+                "width": "56px",
+                "height": "56px",
+                "alignSelf": "stretch",
+                "borderRadius": "12px",
+                "display": "flex",
+                "flexDirection": "column",
+                "justifyContent": "center",
+                "alignItems": "center",
+                "gap": "6px"
+              },
+              "zIndex": 2,
+              "imageUrl": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/1471a773-a472-4839-9d01-14e8ab72f9bd"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "originUrl": "https://www.figma.com/design/BmjmTZ6UKpPwhifoZ7qlUj/%E6%B5%81%E5%BD%B1?node-id=764-94226&t=asBwiBhJOshP5yxj-4"
+}

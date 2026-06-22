@@ -125,14 +125,14 @@ export default function Section3ScrollEffect() {
             zIndex: 4,
             width: 'min(833px, calc(100vw - 40px))',
             margin: '0 auto',
-            paddingTop: 108,
+            paddingTop: 124,
             textAlign: 'center',
             flexShrink: 0,
             willChange: 'transform',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: 12,
+            gap: 16,
             ...styles.title,
           }}
         >
@@ -142,11 +142,9 @@ export default function Section3ScrollEffect() {
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             <p style={{ margin: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '29px', letterSpacing: '-0.018em', color: 'rgba(255,255,255,0.6)' }}>
-              流影将色彩、版式与语言完整表达
+              流影以系统思维设计拓展设计
             </p>
-            <p style={{ margin: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '29px', letterSpacing: '-0.018em', color: 'rgba(255,255,255,0.6)' }}>
-              以系统思维设计
-            </p>
+
             <p style={{ margin: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '29px', letterSpacing: '-0.018em', color: 'rgba(255,255,255,0.6)' }}>
               让每个创意都能进入真实运营场景
             </p>
@@ -198,7 +196,7 @@ export default function Section3ScrollEffect() {
                 <img
                   src="/section3/coffee.jpg"
                   alt="产品图"
-                  style={{ aspectRatio: '3 / 4', width: '100%', objectFit: 'cover', display: 'block', borderRadius: 16 }}
+                  style={{ aspectRatio: '3 / 4', width: '100%', objectFit: 'cover', display: 'block', borderRadius: 24 }}
                 />
               </figure>
 
@@ -245,7 +243,7 @@ export default function Section3ScrollEffect() {
                       </div>
                       {/* 比例选择器 */}
                       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '6px 12px', gap: 4, border: '1px solid #EBEBEB', borderRadius: 29, height: 36 }}>
-                        <span style={{ fontFamily: 'PingFang SC, sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '22px', color: '#2B2B2B' }}>9:16</span>
+                        <span style={{ fontFamily: 'PingFang SC, sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '22px', color: '#2B2B2B' }}>3:4</span>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ transform: 'rotate(90deg)', flexShrink: 0 }}>
                           <path d="M6 4l4 4-4 4" stroke="#CFCFCF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
@@ -305,7 +303,7 @@ export default function Section3ScrollEffect() {
                         aspectRatio: '3 / 4',
                         width: '100%',
                         overflow: 'hidden',
-                        borderRadius: 16,
+                        borderRadius: 24,
                       }}
                     >
                       {/* 图片（始终完整展示） */}

@@ -15,13 +15,17 @@ export default function SplashScreen() {
   const [headerBg, setHeaderBg] = useState(false)
   const [headerTheme, setHeaderTheme] = useState<'dark' | 'light' | number>('dark')
 
+  const handleSection4BgOpacity = (opacity: number) => {
+    setHeaderTheme(opacity)
+  }
+
   useEffect(() => {
     const handleScroll = () => {
       const progress = Math.min(window.scrollY / (window.innerHeight * 0.8), 1)
       ditherScrollRef.current = progress
       setHeaderBg(progress >= 1)
 
-      // Section5v2 主题联动：背景从黑→白时 header 跟随变色
+      // Section5v2 存在时沿用原逻辑
       const s5v2 = document.getElementById('section5v2')
       if (s5v2) {
         const rect = s5v2.getBoundingClientRect()
@@ -29,6 +33,23 @@ export default function SplashScreen() {
         const scrolled = -rect.top
         const sectionProgress = Math.max(0, Math.min(1, scrolled / totalH))
         const t = Math.max(0, Math.min(1, sectionProgress / 0.5))
+        if (scrolled >= 0 && scrolled <= totalH) {
+          setHeaderTheme(t)
+          return
+        } else if (scrolled > totalH) {
+          setHeaderTheme('light')
+          return
+        }
+      }
+
+      const s4 = document.getElementById('section4')
+      if (s4) {
+        const rect = s4.getBoundingClientRect()
+        const totalH = s4.offsetHeight
+        const scrolled = -rect.top
+        const sectionProgress = Math.max(0, Math.min(1, scrolled / totalH))
+        // 白色背景在 sectionProgress 0.7→1.0 淡入
+        const t = Math.max(0, Math.min(1, (sectionProgress - 0.7) / 0.3))
         if (scrolled >= 0 && scrolled <= totalH) {
           setHeaderTheme(t)
         } else if (scrolled < 0) {
@@ -103,10 +124,10 @@ export default function SplashScreen() {
       <Section1 />
       <Section2 />
       <Section3ScrollEffect />
-      <Section4 title="更多素材, 一键互联" archiveButton={{ text: '查看全部', href: '/home' }} />
+      <Section4 title="更多素材, 一键互联" archiveButton={{ text: '查看全部', href: '/home' }} onBgOpacity={handleSection4BgOpacity} />
 
       {/* Section5v2：滚动展开媒体动效，背景从透明→白 */}
-      <Section5v2 />
+      {/* <Section5v2 /> */}
 
       {/* 白色背景区域 */}
       <div style={{ background: '#FFFFFF', position: 'relative', zIndex: 1 }}>
